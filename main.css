@@ -54,10 +54,6 @@ body {
   background: linear-gradient(0deg, rgb(157, 183, 198, 0), rgb(0, 0, 0, 0.1));
 }
 
-#header #navbar ul .scrolled:hover {
-  background: linear-gradient(0deg, rgb(0, 0, 0, 0), hsl(0, 0%, 13%));
-}
-
 #header #navbar ul li .navLink {
   color: #fff;
   text-decoration: none;
