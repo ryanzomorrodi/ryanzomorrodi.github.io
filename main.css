@@ -1,0 +1,82 @@
+@import url("https://fonts.googleapis.com/css2?family=MuseoModerno&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+#aboutHeader {
+  color: #fff;
+  height: 60px;
+  padding: 0 0 0 60px;
+}
+
+body {
+  font-family: "MuseoModerno", cursive;
+}
+
+#header {
+  color: #fff;
+  font-size: 16px;
+  height: 60px;
+  position: fixed;
+  width: 100%;
+  -webkit-transition: all 0.3s linear;
+  -moz-transition: all 0.3s linear;
+  -o-transition: all 0.3s linear;
+  transition: all 0.3s linear;
+}
+
+#header #navbar ul li {
+  display: inline;
+  float: right;
+  height: 16px;
+  padding: 22px;
+  margin-right: 4px;
+}
+
+#header #navbar ul li:first-child {
+  margin-right: 50px;
+}
+
+#header #navbar ul li:hover {
+  background: linear-gradient(0deg, rgb(157, 183, 198, 0), hsl(202, 26%, 60%));
+}
+
+#header #navbar ul .scrolled:hover {
+  background: linear-gradient(0deg, rgb(0, 0, 0, 0), hsl(0, 0%, 13%));
+}
+
+#header #navbar ul li .navLink {
+  color: #fff;
+  text-decoration: none;
+}
+
+#headerName {
+  color: #fff;
+  height: 60px;
+  padding: 50vh 0 0 60px;
+}
+
+.headerNameFixed {
+  top: 0;
+  margin: 0;
+  padding: 10px 0 0 60px !important;
+  z-index: 100;
+  position: fixed !important;
+}
+
+#welcomeSection {
+  background: url("https://ryanzomorrodi.github.io/homepageBackground.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  width: 100%;
+}
+
+.webp #welcomeSection {
+  background: url("https://ryanzomorrodi.github.io/homepageBackground.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
