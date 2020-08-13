@@ -22,7 +22,6 @@ $(document).ready(function() {
       $(".navLink").css({
         "color": "white"
       });
-      $('#header #navbar ul li').addClass('scrolled');
     }
     if ($(window).scrollTop() < pass) {
       $("#header").css({
@@ -35,7 +34,6 @@ $(document).ready(function() {
       $(".navLink").css({
         "color": "white"
       });
-      $('#header #navbar ul li').removeClass('scrolled');
     }
   });
 });
