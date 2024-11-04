@@ -19,7 +19,7 @@ format:
   html:
     toc: false
     css: 
-      - _assets/vertical-slider.scss
+      - _assets/vertical-slider.css
       - _assets/theme-home.css
     page-layout: full
 ---
