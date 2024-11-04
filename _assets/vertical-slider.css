@@ -7,18 +7,19 @@
 .scrolling-words-box {
     height: 3rem;
     overflow: hidden;
+}
 
-    ul {
-        margin: 0;
-        padding: 0;
-        animation: scrollUp 6s;
-        li {
-            display: flex;
-            justify-content: flex-start;
-            height: 3rem;
-            list-style: none; 
-        }
-    }
+.scrolling-words-box ul {
+  margin: 0;
+  padding: 0;
+  animation: scrollUp 6s;
+}
+
+.scrolling-words-box ul li {
+  display: flex;
+  justify-content: flex-start;
+  height: 3rem;
+  list-style: none; 
 }
 
 @keyframes scrollUp {
