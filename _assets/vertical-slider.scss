@@ -1,0 +1,41 @@
+.scrolling-words-container {
+    display: flex;
+    font-size: 2rem;
+    font-weight: 800; 
+}
+
+.scrolling-words-box {
+    height: 3rem;
+    overflow: hidden;
+
+    ul {
+        margin: 0;
+        padding: 0;
+        animation: scrollUp 6s;
+        li {
+            display: flex;
+            justify-content: flex-start;
+            height: 3rem;
+            list-style: none; 
+        }
+    }
+}
+
+@keyframes scrollUp {
+    0% {
+      -webkit-transform: translateY(0);
+              transform: translateY(0);
+    }
+    25% {
+      -webkit-transform: translateY(-25%);
+              transform: translateY(-25%);
+    }
+    50% {
+      -webkit-transform: translateY(-50%);
+              transform: translateY(-50%);
+    }
+    75% {
+      -webkit-transform: translateY(-75%);
+              transform: translateY(-75%);
+    }
+  }
