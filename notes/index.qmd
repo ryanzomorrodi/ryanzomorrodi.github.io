@@ -1,0 +1,13 @@
+---
+title: "Notes"
+listing:
+  type: grid
+  fields: 
+    - title
+    - description
+    - date
+    - image
+    - categories
+  categories: true
+  sort: "date desc"
+---

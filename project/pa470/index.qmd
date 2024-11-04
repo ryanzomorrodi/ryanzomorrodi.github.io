@@ -1,0 +1,35 @@
+---
+title: PA 470
+subtitle: Machine Learning in the Public Sector
+slug: pa470
+author: Ryan Zomorrodi
+date: 2024/04/27
+image: pa470.png
+links:
+- icon: journal-code
+  name: My coursework
+  url: https://ryanzomorrodi.github.io/PA470/
+- icon: link-45deg
+  name: Fall 2024 PA470 Website
+  url: https://pa470spring2024.netlify.app/about/
+---
+
+PA 470 - Artificial Intelligence and Machine Learning in the Public Sector is
+a course taught by Eric Langowski as a part of the Civic Analytics curriculum
+at UIC. In the course, we worked through building an machine learning model to 
+predict the sale prices of Cook county single family homes.
+
+For my final project, I decided to do a replication study of *Estimated 
+Childhood Lead Exposure From Drinking Water in Chicago* (Huynh et al., 2024). 
+In the process, I learned a ton about Chicago's lead contaminated water issues
+(Did you know that lead service lines were MANDATED by the city of Chicago until
+1986 and as a result Chicago has 400,000 lead service lines).
+
+The modeling involved a ton of data cleaning to aggregate data from the City of 
+Chicago Department of Water Management Lead Test data, US Decennial Census, 
+American Community Survey, Chicago Data Portal, and Chicago Health Atlas. 
+Unfortunately, predicting lead exposure at the block level for a city as big as 
+Chicago is quite a big problem. In the end I limited my models to elastic net 
+logistic regression and random forest and limited my area of interest to the 
+West Side of Chicago. But it was definitely a cool project, and you can check 
+out my work at the above website.

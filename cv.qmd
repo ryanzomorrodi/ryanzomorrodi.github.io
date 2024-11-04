@@ -1,0 +1,299 @@
+---
+title: "Ryan Zomorrodi's CV"
+author:
+  firstname: Ryan
+  lastname: Zomorrodi
+  position: Research Analyst・Data Scientist
+  contacts:
+    - icon: fa envelope
+      text: rzomor2@uic.edu
+      url: "mailto:rzomor2@uic.edu"
+    - icon: assets/icon/bi-house-fill.svg
+      text: ryanzomorrodi.github.io
+      url: https://ryanzomorrodi.github.io
+    - icon: fa brands orcid
+      text: 0009-0003-6417-5985
+      url: https://orcid.org/0009-0003-6417-5985
+    - icon: fa brands github
+      text: GitHub
+      url: https://github.com/ryanzomorrodi
+    - icon: fa brands linkedin
+      text: LinkedIn
+      url: https://www.linkedin.com/in/ryanzomorrodi/
+style:
+  color-accent: "000000"
+format: awesomecv-typst
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r}
+library(typstcv)
+library(readr)
+```
+
+
+## Education
+
+```{r}
+#| output: asis
+
+educ <- read_csv(
+  "_data/cv/education.csv",
+  col_types = cols(
+    start = col_date(format = "%F"),
+    end = col_date(format = "%F"),
+    .default = col_character()
+  )
+)
+
+educ |>
+  format_date(
+    end = "end", 
+    sort_by = "start"
+  ) |>
+  resume_entry(
+    title = "degree",
+    description = "institution",
+    details = c("detail1", "detail2", "detail3", "detail4")
+  )
+```
+
+## Work Experience
+
+```{r}
+#| output: asis
+
+work <- read_csv(
+  "_data/cv/work.csv",
+  col_types = cols(
+    start = col_date(format = "%F"),
+    end = col_date(format = "%F"),
+    .default = col_character()
+  )
+)
+
+work |>
+  format_date(
+    start = "start",
+    end = "end", 
+    sort_by = "start"
+  ) |>
+  resume_entry(
+    title = "title",
+    description = "institution",
+    details = c("detail1", "detail2", "detail3")
+  )
+```
+
+## Skills
+
+```{r}
+#| output: asis
+skill <- read_csv(
+  "_data/cv/skill.csv",
+  col_types = cols(
+    .default = col_character()
+  )
+)
+
+skill |>
+  resume_entry(
+    title = "title",
+    description = "description"
+  )
+``` 
+
+{{< pagebreak >}}
+
+## Service
+
+```{r}
+#| output: asis
+service <- read_csv(
+  "_data/cv/service.csv",
+  col_types = cols(
+    start = col_date(format = "%F"),
+    end = col_date(format = "%F"),
+    .default = col_character() 
+  )
+)
+
+service |>
+  format_date(
+    start = "start",
+    end = "end", 
+    sort_by = "end"
+  ) |>
+  resume_entry(
+    title = "role",
+    description = "organization"
+  )
+```
+
+## Teaching Experience
+
+```{r}
+#| output: false
+
+teaching_experience <- read_csv(
+  "_data/cv/teaching_experience.csv",
+  col_types = cols(
+    start = col_date(format = "%F"),
+    end = col_date(format = "%F"),
+    .default = col_character()
+  )
+)
+
+teaching_experience |>
+  format_date(
+    start = "start",
+    end = "end", 
+    date_format = "%Ob %d, %y",
+    sort_by = "start"
+  ) |>
+  resume_entry(
+    title = "presentation",
+    description = "organization"
+  )
+```
+
+```{=typst}
+#resume-entry(title: "Using GIS to Study Social Determinants of Health with R",location: link("https://ryanzomorrodi.github.io/NAUTraining/")[Resource Link],date: "Jun 06, 24 - Jun 07, 24",description: "Northern Arizona University Center for Health Equity Research",)
+#resume-entry(title: "State Health Departments Chronic Disease Surveillance",date: "Mar 06, 24 - Jul 31, 24",description: "GIS Capacity Building Project",)
+#resume-entry(title: "An Introduction to ArcGIS Online Mini-Course",date: "Oct 17, 23 - Oct 24, 23",description: "GIS Capacity Building Project",)
+#resume-entry(title: "Tribal Epidemiological Centers Chronic Disease Surveillance",date: "Oct 10, 23 - Jan 31, 24",description: "GIS Capacity Building Project",)
+#resume-entry(title: "A Gentle Introduction to GIS Mini-Course",date: "Sep 19, 23 - Sep 26, 23",description: "GIS Capacity Building Project",)
+```
+
+## Presentations
+
+```{r}
+#| output: false
+
+presentation <- read_csv(
+  "_data/cv/presentation.csv",
+  col_types = cols(
+    date = col_date(format = "%F"),
+    .default = col_character()
+  )
+)
+
+presentation |>
+  format_date(
+    start = "date",
+    sort_by = "start"
+  ) |>
+  resume_entry(
+    title = "title",
+    location = "link",
+    description = "organization",
+  )
+```
+
+```{=typst}
+#resume-entry(title: "RNA-sequencing analysis of Macrophage Hyperactivation",date: "Apr 2023",description: "UIC Undergraduate Research Forum",)
+#resume-entry(title: "Empowering Community Members to Investigate and Address Chicago’s Health Disparities",date: "Nov 2022",description: "American Public Health Association",)
+#resume-entry(title: "Developing Student Workshops to Increase Community Engagement in Addressing Chicago’s Health Disparities",date: "Apr 2022",description: "UIC School of Public Health Research and Scholarship Week Lightning Talks",)
+#resume-entry(title: "Empowering Community Members to Investigate and Address Chicago’s Health Disparities",location: link("https://youtu.be/LRhDg3IVbTM?t=340&si=4LewEO33ysc8VRMN")[Recording Link],date: "Apr 2022",description: "UIC Minority Health Conference",)
+```
+
+## Publications
+
+```{r}
+#| output: asis
+
+publication <- read_csv(
+  "_data/cv/publication.csv",
+  col_types = cols(
+    epub_date = col_date(format = "%F"),
+    .default = col_character()
+  )
+)
+
+publication |>
+  format_date(
+    start = "epub_date",
+    sort_by = "start"
+  ) |>
+  resume_entry(
+    title = "title",
+    description = "journal",
+    details = "doi"
+  )
+```
+
+## Honors
+
+```{r}
+#| output: asis
+
+honor <- read_csv(
+  "_data/cv/honor.csv",
+  col_types = cols(
+    awarded = col_date(format = "%F"),
+    .default = col_character()
+  )
+)
+
+honor |>
+  format_date(
+    start = "awarded", 
+    date_format = "%Y", 
+    sort_by = "start") |>
+  resume_entry(
+    description = "institution",
+    title = "honor"
+  )
+```
+
+## Professional Membership
+
+```{r}
+#| output: asis
+
+professional_membership <- read_csv(
+  "_data/cv/professional_membership.csv",
+  col_types = cols(
+    start = col_date(format = "%F"),
+    end = col_date(format = "%F"),
+    .default = col_character()
+  )
+)
+
+professional_membership |>
+  format_date(
+    start = "start",
+    end = "end",
+  ) |>
+  resume_entry(
+    title = "organization",
+  )
+```
+
+## Leadership
+```{r}
+#| output: asis
+
+leadership <- read_csv(
+  "_data/cv/leadership.csv",
+  col_types = cols(
+    start = col_date(format = "%Y"),
+    end = col_date(format = "%Y"),
+    .default = col_character()
+  )
+)
+
+leadership |>
+  format_date(
+    start = "start",
+    end = "end",
+    date_format = "%Y"
+  ) |>
+  resume_entry(
+    title = "role",
+    description = "organization"
+  )
+```

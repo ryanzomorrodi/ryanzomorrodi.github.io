@@ -1,0 +1,29 @@
+---
+title: healthatlas
+subtitle: Explore and Import Metopio Powered Health Atlases
+slug: healthatlas
+author: Ryan Zomorrodi
+date: 2024/09/13
+image: healthatlas.png
+links:
+- icon: book
+  name: Docs
+  url: https://ryanzomorrodi.github.io/healthatlas/
+- icon: braces-asterisk 
+  name: CRAN
+  url: https://cran.r-project.org/web/packages/healthatlas/index.html
+- icon: robot 
+  name: r-universe
+  url: https://ryanzomorrodi.r-universe.dev/healthatlas
+- icon: github 
+  name: Source
+  url: https://github.com/ryanzomorrodi/healthatlas/
+---
+
+`healthatlas` is an unofficial R wrapper for Metopio atlases. Users can explore 
+and download public health data straight from any atlas. This makes R workflows
+that rely on atlas data more painless and reproducable.
+
+I developed healthatlas in part as an exploration of `httr2` functionality and
+to develop an easier way to download data from the Chicago Health Atlas (I find
+the website interface for downloading data a little inconvenient). 

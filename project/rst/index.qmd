@@ -1,0 +1,29 @@
+---
+title: Rate Stabilizing Tool 2
+subtitle: Small Area Estimation ArcGIS Pro Python Toolbox
+slug: rst
+author: Ryan Zomorrodi
+date: 2024/07/18
+image: rst.png
+links:
+- icon: github 
+  name: Source
+  url: https://github.com/CEHI-code-repos/RateStabilizingTool2/
+---
+
+The Rate Stabilizing Tool(box) 2 is an ArcGIS Pro python toolbox for generating 
+reliable, local-level age-standardized measures of chronic disease developed 
+from scratch in partnership with the Centers for Disease Control and Prevention 
+to replace the original Rate Stabilizing Tool.
+
+It composed of two tools:
+
+- Individual Data Processing Tool (IDP): Aggregates individual data to an 
+  optionally age stratified population table and preforms checks to warn user if
+  input data is invalid.
+- Rate Stabilizing Tool (RST): Utilizes a restricted CAR model to generate 
+  optionally age adjusted rates for local areas given the population data from 
+  the IDP and a geographic layer.
+
+It improves on the original RST by radically simplifying the interface, speeding
+up estimatation time, and providing better error/warning messaging.

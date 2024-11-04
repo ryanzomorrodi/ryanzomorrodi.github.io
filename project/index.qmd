@@ -1,0 +1,17 @@
+---
+title: Projects
+subtitle: Software, tools, and reports I have worked on
+listing:
+  type: grid
+  fields: 
+    - title
+    - subtitle
+    - date
+    - image
+  sort: "date desc"
+  image-height: 280px;
+format: 
+  html:
+    css: ../_assets/theme-blog.css
+---
+

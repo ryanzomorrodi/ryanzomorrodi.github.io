@@ -1,0 +1,63 @@
+---
+title: Ryan Zomorrodi
+about:
+  id: hero-heading
+  template: trestles
+  image: _assets/headshot.jpeg
+  image-shape: round
+listing:
+  - id: recent-project-listing
+    contents:
+      - "project/*/*.qmd"
+    sort: "date desc"
+    image-height: 280px;
+    type: grid
+    max-items: 3
+    categories: false
+    fields: [title, subtitle, image, date]
+format: 
+  html:
+    toc: false
+    css: 
+      - _assets/vertical-slider.scss
+      - _assets/theme-home.css
+    page-layout: full
+---
+ 
+::: {#hero-heading}
+
+```{=html}
+<span class='scrolling-words-container'> Hi, I'm </span>
+
+<span class='scrolling-words-container'>
+  <span class='scrolling-words-box'>
+    <ul>
+      <li style='color: #30638E'>Ryan Zomorrodi</li>
+      <li style='color: #30638E'>a Data Analyst</li>
+      <li style='color: #30638E'>an OSS Enthusiast</li>
+      <li style='color: #30638E'>an R Nerd</li>
+    </ul> 
+  </span>
+</span>
+
+<div class = "links">
+  <a class="link-dark me-1" href="https://www.linkedin.com/in/ryanzomorrodi/"><i class="bi bi-linkedin me-1"></i></a>
+  <a class="link-dark me-1" href="https://github.com/ryanzomorrodi"><i class="bi bi-github me-1"></i></a>
+  <a class="link-dark me-1" href="https://ryanzomorrodi.r-universe.dev/builds"><i class="bi bi-rocket-takeoff me-1"></i></a>
+</div>
+<br>
+
+```
+::: {.big-paragraph}
+I’m an data analyst working for the Children's Environmental Health Initiative
+and an MS in Health Analytics student at University of Illinois Chicago. I 
+enjoy utilizing data to solve complex problems and making tools that make data 
+analysis easier.
+:::
+
+:::
+
+## Latest [Projects](/project)
+
+::: {#recent-project-listing}
+:::

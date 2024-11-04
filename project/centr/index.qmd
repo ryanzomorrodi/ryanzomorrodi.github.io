@@ -1,0 +1,30 @@
+---
+title: centr
+subtitle: A Package for Weighted and Unweighted Spatial Centers
+slug: centr
+author: Ryan Zomorrodi
+date: 2024/07/21
+image: centr.png
+links:
+- icon: book
+  name: Docs
+  url: https://ryanzomorrodi.github.io/centr/
+- icon: braces-asterisk 
+  name: CRAN
+  url: https://cran.r-project.org/web/packages/centr/index.html
+- icon: robot 
+  name: r-universe
+  url: https://ryanzomorrodi.r-universe.dev/centr
+- icon: github 
+  name: Source
+  url: https://github.com/ryanzomorrodi/centR/
+---
+
+`centr` is a package designed to calculate population weighted mean or median
+spatial centers. Mean centers can be calculated for projected and lon lat 
+geometries. `centr` assumes a spherical representation of the earth for lon lat
+geometries, similar to S2.
+
+Population weighted centroids are a powerful tool to calculate plausible 
+population exposure measures, and I use them quite a bit in my work. Now with
+`centr` calculating population weighted centroids within R is easy and fast.

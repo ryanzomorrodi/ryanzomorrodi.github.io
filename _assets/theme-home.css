@@ -1,0 +1,20 @@
+.quarto-title .title {
+    display: none;
+}
+
+h2 {
+    font-family: "Ubuntu", sans-serif;
+}
+
+.big-paragraph {
+    font-size: 1.25rem;
+}
+
+.links {
+    margin-top: .5rem;
+}
+
+.links a {
+    font-size: 1.25rem;
+    color: #141414;
+}

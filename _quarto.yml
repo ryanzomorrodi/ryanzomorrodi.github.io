@@ -1,0 +1,44 @@
+project:
+  type: website
+  output-dir: docs
+  preview:
+    browser: true
+
+website:
+  title: Ryan Zomorrodi
+  site-url: https://ryanzomorrodi.gihub.io
+  repo-url: https://github.com/ryanzomorrodi/ryanzomorrodi.github.io
+  repo-actions:
+    - source
+    - issue
+  search: false
+  navbar:
+    right:
+      - href: cv.qmd
+        text: CV
+      - href: project/index.qmd
+        text: Projects
+  page-footer:
+    border: true
+    left: "&#169; 2024 Ryan Zomorrodi"
+    center:
+      - icon: linkedin
+        href: https://www.linkedin.com/in/ryanzomorrodi/
+      - icon: github
+        href: https://github.com/ryanzomorrodi
+      - icon: rocket-takeoff
+        href: https://ryanzomorrodi.r-universe.dev/builds
+
+
+
+format:
+  html:
+    theme:
+      - cosmo
+      - _assets/theme.scss
+      - _assets/theme-light.scss
+    lightbox: true
+    toc: true
+
+execute:
+  freeze: auto
