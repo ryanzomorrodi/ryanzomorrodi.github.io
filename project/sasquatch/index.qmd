@@ -1,0 +1,41 @@
+---
+title: sasquatch
+subtitle: Use SAS, R, and Quarto together
+slug: sasquatch
+author: Ryan Zomorrodi
+image: sasquatch.png
+date: 2024/11/16
+links:
+- icon: book
+  name: Docs
+  url: https://ryanzomorrodi.github.io/sasquatch/
+- icon: github 
+  name: Source
+  url: https://github.com/ryanzomorrodi/sasquatch/
+---
+
+I have had to do a fair number of assignments in SAS, and whenever I did
+I missed the ability to simply include all my code and my comments in a single 
+reproducable rmarkdown/quarto document. When I first came across 
+[this presentation](https://www.youtube.com/watch?v=4c9T6-__vI8) by Johann 
+Laurent, I became excited. BaselR had introduced a package, [`configSAS`](https://github.com/baselr/configSAS) 
+that allowed me to use SAS with all the nicities that come with quarto!
+
+When I set `configSAS` up, I became a little disappointed. There was no syntax
+highlighting, the SAS output's CSS caused weird styling behavior throughout the 
+rest of the quarto document, and I couldn't see any SAS output unless I rendered
+the entire quarto document over again. Still, I thought this was better than 
+nothing. I continued to use `configSAS` for almost a year until I decided there 
+had to be a better way. That's what `sasquatch` aims to be.
+
+`sasquatch` gives you the ability to work with SAS interactively just as you
+would R or Python, but within your R IDE of choice. And it allows you render
+beautiful quarto documents with syntax highlighting. You can even send tables
+between R and SAS to do your analysis in whatever language is easiest!
+
+I won't lie, a few of the solutions I had to use were a little janky. Syntax 
+highlighting is provided by a separate xml file specified in the quarto options. 
+The SAS output is rendered inside an iframe, which is dynamically resized to fit
+its contents using a javascript library linked in the quarto options and within
+each iframe. Hopefully, I can think of more elegant solutions to these problems,
+but in the mean time, check it out!
