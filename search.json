@@ -35,18 +35,25 @@
     "text": "Cool maps\n\nVector map\n\nelection = d3.csv(\"https://raw.githubusercontent.com/tonmcg/US_County_Level_Election_Results_08-20/refs/heads/master/2020_US_County_Level_Presidential_Results.csv\")\n\ncounties = {\n  const counties = topojson.feature(us, us.objects.counties).features;\n  const _election = new Map(election.map((d) =&gt; [d.fips, d]));\n  counties.forEach(county =&gt; {\n    county.properties.margin2020 = +_election.get(county.id)?.margin2020;\n    county.properties.votes = +_election.get(county.id)?.votes;\n  });\n  return counties;\n}\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPlot.plot({\n  projection: \"albers-usa\",\n  length: {type: \"sqrt\", transform: Math.abs},\n  marks: [\n    Plot.geo(states, {strokeWidth: 0.5}),\n    Plot.geo(nation),\n    Plot.vector(\n      counties,\n      Plot.centroid({\n        anchor: \"start\",\n        length: (d) =&gt; d.properties.margin2020 * d.properties.votes,\n        stroke: (d) =&gt; d.properties.margin2020 &gt; 0 ? \"red\" : \"blue\",\n        rotate: (d) =&gt; d.properties.margin2020 &gt; 0 ? 60 : -60\n      })\n    )\n  ]\n})"
   },
   {
-    "objectID": "project/pa470/index.html",
-    "href": "project/pa470/index.html",
-    "title": "PA 470",
+    "objectID": "project/sasquatch/index.html",
+    "href": "project/sasquatch/index.html",
+    "title": "sasquatch",
     "section": "",
-    "text": "PA 470 - Artificial Intelligence and Machine Learning in the Public Sector is a course taught by Eric Langowski as a part of the Civic Analytics curriculum at UIC. In the course, we worked through building an machine learning model to predict the sale prices of Cook county single family homes.\nFor my final project, I decided to do a replication study of Estimated Childhood Lead Exposure From Drinking Water in Chicago (Huynh et al., 2024). In the process, I learned a ton about Chicago’s lead contaminated water issues (Did you know that lead service lines were MANDATED by the city of Chicago until 1986 and as a result Chicago has 400,000 lead service lines).\nThe modeling involved a ton of data cleaning to aggregate data from the City of Chicago Department of Water Management Lead Test data, US Decennial Census, American Community Survey, Chicago Data Portal, and Chicago Health Atlas. Unfortunately, predicting lead exposure at the block level for a city as big as Chicago is quite a big problem. In the end I limited my models to elastic net logistic regression and random forest and limited my area of interest to the West Side of Chicago. But it was definitely a cool project, and you can check out my work at the above website."
+    "text": "I have had to do a fair number of assignments in SAS, and whenever I did I missed the ability to simply include all my code and my comments in a single reproducable rmarkdown/quarto document. When I first came across this presentation by Johann Laurent, I became excited. BaselR had introduced a package, configSAS that allowed me to use SAS with all the nicities that come with quarto!\nWhen I set configSAS up, I became a little disappointed. There was no syntax highlighting, the SAS output’s CSS caused weird styling behavior throughout the rest of the quarto document, and I couldn’t see any SAS output unless I rendered the entire quarto document over again. Still, I thought this was better than nothing. I continued to use configSAS for almost a year until I decided there had to be a better way. That’s what sasquatch aims to be.\nsasquatch gives you the ability to work with SAS interactively just as you would R or Python, but within your R IDE of choice. And it allows you render beautiful quarto documents with syntax highlighting. You can even send tables between R and SAS to do your analysis in whatever language is easiest!\nI won’t lie, a few of the solutions I had to use were a little janky. Syntax highlighting is provided by a separate xml file specified in the quarto options. The SAS output is rendered inside an iframe, which is dynamically resized to fit its contents using a javascript library linked in the quarto options and within each iframe. Hopefully, I can think of more elegant solutions to these problems, but in the mean time, check it out!"
   },
   {
-    "objectID": "project/healthatlas/index.html",
-    "href": "project/healthatlas/index.html",
-    "title": "healthatlas",
+    "objectID": "project/centr/index.html",
+    "href": "project/centr/index.html",
+    "title": "centr",
     "section": "",
-    "text": "healthatlas is an unofficial R wrapper for Metopio atlases. Users can explore and download public health data straight from any atlas. This makes R workflows that rely on atlas data more painless and reproducable.\nI developed healthatlas in part as an exploration of httr2 functionality and to develop an easier way to download data from the Chicago Health Atlas (I find the website interface for downloading data a little inconvenient)."
+    "text": "centr is a package designed to calculate population weighted mean or median spatial centers. Mean centers can be calculated for projected and lon lat geometries. centr assumes a spherical representation of the earth for lon lat geometries, similar to S2.\nPopulation weighted centroids are a powerful tool to calculate plausible population exposure measures, and I use them quite a bit in my work. Now with centr calculating population weighted centroids within R is easy and fast."
+  },
+  {
+    "objectID": "project/index.html",
+    "href": "project/index.html",
+    "title": "Projects",
+    "section": "",
+    "text": "sasquatch\n\n\nUse SAS, R, and Quarto together\n\n\n\nNov 16, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nhealthatlas\n\n\nExplore and Import Metopio Powered Health Atlases\n\n\n\nSep 13, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncentr\n\n\nA Package for Weighted and Unweighted Spatial Centers\n\n\n\nJul 21, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRate Stabilizing Tool 2\n\n\nSmall Area Estimation ArcGIS Pro Python Toolbox\n\n\n\nJul 18, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPA 470\n\n\nMachine Learning in the Public Sector\n\n\n\nApr 27, 2024\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",
@@ -60,21 +67,21 @@
     "href": "index.html#latest-projects",
     "title": "Ryan Zomorrodi",
     "section": "Latest Projects",
-    "text": "Latest Projects\n\n\n\n\n\n\n\n\n\n\nhealthatlas\n\n\nExplore and Import Metopio Powered Health Atlases\n\n\n\nSep 13, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncentr\n\n\nA Package for Weighted and Unweighted Spatial Centers\n\n\n\nJul 21, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRate Stabilizing Tool 2\n\n\nSmall Area Estimation ArcGIS Pro Python Toolbox\n\n\n\nJul 18, 2024\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Latest Projects\n\n\n\n\n\n\n\n\n\n\nsasquatch\n\n\nUse SAS, R, and Quarto together\n\n\n\nNov 16, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nhealthatlas\n\n\nExplore and Import Metopio Powered Health Atlases\n\n\n\nSep 13, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncentr\n\n\nA Package for Weighted and Unweighted Spatial Centers\n\n\n\nJul 21, 2024\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "project/index.html",
-    "href": "project/index.html",
-    "title": "Projects",
+    "objectID": "project/healthatlas/index.html",
+    "href": "project/healthatlas/index.html",
+    "title": "healthatlas",
     "section": "",
-    "text": "healthatlas\n\n\nExplore and Import Metopio Powered Health Atlases\n\n\n\nSep 13, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncentr\n\n\nA Package for Weighted and Unweighted Spatial Centers\n\n\n\nJul 21, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRate Stabilizing Tool 2\n\n\nSmall Area Estimation ArcGIS Pro Python Toolbox\n\n\n\nJul 18, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPA 470\n\n\nMachine Learning in the Public Sector\n\n\n\nApr 27, 2024\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "healthatlas is an unofficial R wrapper for Metopio atlases. Users can explore and download public health data straight from any atlas. This makes R workflows that rely on atlas data more painless and reproducable.\nI developed healthatlas in part as an exploration of httr2 functionality and to develop an easier way to download data from the Chicago Health Atlas (I find the website interface for downloading data a little inconvenient)."
   },
   {
-    "objectID": "project/centr/index.html",
-    "href": "project/centr/index.html",
-    "title": "centr",
+    "objectID": "project/pa470/index.html",
+    "href": "project/pa470/index.html",
+    "title": "PA 470",
     "section": "",
-    "text": "centr is a package designed to calculate population weighted mean or median spatial centers. Mean centers can be calculated for projected and lon lat geometries. centr assumes a spherical representation of the earth for lon lat geometries, similar to S2.\nPopulation weighted centroids are a powerful tool to calculate plausible population exposure measures, and I use them quite a bit in my work. Now with centr calculating population weighted centroids within R is easy and fast."
+    "text": "PA 470 - Artificial Intelligence and Machine Learning in the Public Sector is a course taught by Eric Langowski as a part of the Civic Analytics curriculum at UIC. In the course, we worked through building an machine learning model to predict the sale prices of Cook county single family homes.\nFor my final project, I decided to do a replication study of Estimated Childhood Lead Exposure From Drinking Water in Chicago (Huynh et al., 2024). In the process, I learned a ton about Chicago’s lead contaminated water issues (Did you know that lead service lines were MANDATED by the city of Chicago until 1986 and as a result Chicago has 400,000 lead service lines).\nThe modeling involved a ton of data cleaning to aggregate data from the City of Chicago Department of Water Management Lead Test data, US Decennial Census, American Community Survey, Chicago Data Portal, and Chicago Health Atlas. Unfortunately, predicting lead exposure at the block level for a city as big as Chicago is quite a big problem. In the end I limited my models to elastic net logistic regression and random forest and limited my area of interest to the West Side of Chicago. But it was definitely a cool project, and you can check out my work at the above website."
   },
   {
     "objectID": "project/rst/index.html",
