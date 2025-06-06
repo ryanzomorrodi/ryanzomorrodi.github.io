@@ -14,7 +14,7 @@ listing:
     type: grid
     max-items: 3
     categories: false
-    fields: [title, subtitle, image, date]
+    fields: [title, subtitle, image, date, categories]
 format: 
   html:
     toc: false

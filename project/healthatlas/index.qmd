@@ -5,6 +5,10 @@ slug: healthatlas
 author: Ryan Zomorrodi
 date: 2024/09/13
 image: healthatlas.png
+categories:
+- R
+- API
+- httr2
 links:
 - icon: book
   name: Docs

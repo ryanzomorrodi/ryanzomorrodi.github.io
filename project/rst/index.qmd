@@ -1,23 +1,31 @@
 ---
-title: Rate Stabilizing Tool 2
+title: Rate Stabilizing Toolbox
 subtitle: Small Area Estimation ArcGIS Pro Python Toolbox
 slug: rst
 author: Ryan Zomorrodi
 date: 2024/07/18
 image: rst.png
+categories:
+  - Python
+  - ArcGIS Pro
+  - Bayesian
+  - GIS
 links:
 - icon: github 
   name: Source
-  url: https://github.com/CEHI-code-repos/RateStabilizingTool2/
+  url: https://github.com/CEHI-code-repos/RateStabilizingToolbox/
 ---
 
-The Rate Stabilizing Tool(box) 2 is an ArcGIS Pro python toolbox for generating 
+The Rate Stabilizing Toolbox (RSTbx) is an ArcGIS Pro Python toolbox for generating 
 reliable, local-level age-standardized measures of chronic disease developed 
 from scratch in partnership with the Centers for Disease Control and Prevention 
 to replace the original Rate Stabilizing Tool.
 
-It composed of two tools:
+It composed of three tools:
 
+- Census Data Retriever Tool (CDR): Utilizes the Census API to download county or
+  tract-level population tables (optionally stratified by age) along with boundary
+  files from the Census HTTP server.
 - Individual Data Processing Tool (IDP): Aggregates individual data to an 
   optionally age stratified population table and preforms checks to warn user if
   input data is invalid.

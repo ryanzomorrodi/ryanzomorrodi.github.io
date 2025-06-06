@@ -1,0 +1,31 @@
+---
+format:
+  html:
+    from: "markdown+emoji"
+title: socratadata
+subtitle: Explore and Import Socrata Data
+slug: socratadata
+author: Ryan Zomorrodi
+date: 2025/05/05
+image: socratadata.png
+categories:
+  - R
+  - Rust
+  - SQL
+  - API
+  - httr2
+links:
+- icon: book
+  name: Docs
+  url: https://ryanzomorrodi.github.io/socratadata/
+- icon: robot 
+  name: r-universe
+  url: https://ryanzomorrodi.r-universe.dev/socratadata/
+- icon: github 
+  name: Source
+  url: https://github.com/ryanzomorrodi/socratadata/
+---
+
+`socratadata` is an unofficial R wrapper around the Socrata Data, Metadata, and Discovery APIs which utilizes Rust :crab: to parse Socrata datatypes into R columns. The City of Chicago currently maintains another R package, `socratadata` improves upon the existing [`RSocrata`](https://dev.socrata.com/connectors/rsocrata) package by introducing support for the Socrata Discovery API and all Socrata datatypes. Additionally, `socratadata` allows for easy use of [Socrata Query Language (SoQL)](https://dev.socrata.com/docs/queries/).
+
+Between `socratadata` and `healthatlas`, you can easily import any dataset into R from both Chicago's major data repositories, the [Chicago Data Portal](https://data.cityofchicago.org/) and [Chicago Health Atlas](https://chicagohealthatlas.org/). And countless other government data repositories are supported, like the [Centers for Disease Control & Prevention](https://data.cdc.gov/), [U.S. Department of Transportation](https://data.transportation.gov/), and many more.

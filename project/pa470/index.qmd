@@ -5,6 +5,11 @@ slug: pa470
 author: Ryan Zomorrodi
 date: 2024/04/27
 image: pa470.png
+categories:
+- R
+- Machine Learning
+- tidymodels
+- GIS
 links:
 - icon: journal-code
   name: My coursework

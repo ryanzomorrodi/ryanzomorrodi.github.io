@@ -3,8 +3,14 @@ title: sasquatch
 subtitle: Use SAS, R, and Quarto together
 slug: sasquatch
 author: Ryan Zomorrodi
-image: sasquatch.png
 date: 2024/11/16
+image: sasquatch.png
+categories:
+  - R
+  - SAS
+  - Python
+  - reticulate
+  - SASPy
 links:
 - icon: book
   name: Docs
@@ -12,6 +18,9 @@ links:
 - icon: github 
   name: Source
   url: https://github.com/ryanzomorrodi/sasquatch/
+- icon: pencil-square
+  name: rOpenSci Peer Review
+  url: https://github.com/ropensci/software-review/issues/673
 ---
 
 I have had to do a fair number of assignments in SAS, and whenever I did
@@ -33,9 +42,6 @@ would R or Python, but within your R IDE of choice. And it allows you render
 beautiful quarto documents with syntax highlighting. You can even send tables
 between R and SAS to do your analysis in whatever language is easiest!
 
-I won't lie, a few of the solutions I had to use were a little janky. Syntax 
-highlighting is provided by a separate xml file specified in the quarto options. 
-The SAS output is rendered inside an iframe, which is dynamically resized to fit
-its contents using a javascript library linked in the quarto options and within
-each iframe. Hopefully, I can think of more elegant solutions to these problems,
-but in the mean time, check it out!
+**Update:** I was invited to give a presentation on the origin and inner workings 
+of `sasquatch` at the May 29th, 2025 SAS Open Source Community of Practice. You
+can see my presentation [here]().

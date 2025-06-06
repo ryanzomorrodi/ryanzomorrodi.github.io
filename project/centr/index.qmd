@@ -5,6 +5,9 @@ slug: centr
 author: Ryan Zomorrodi
 date: 2024/07/21
 image: centr.png
+categories:
+  - R
+  - GIS
 links:
 - icon: book
   name: Docs

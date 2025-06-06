@@ -1,299 +1,189 @@
 ---
-title: "Ryan Zomorrodi's CV"
-author:
-  firstname: Ryan
-  lastname: Zomorrodi
-  position: Research Analyst・Data Scientist
-  contacts:
-    - icon: fa envelope
-      text: rzomor2@uic.edu
-      url: "mailto:rzomor2@uic.edu"
-    - icon: assets/icon/bi-house-fill.svg
-      text: ryanzomorrodi.github.io
-      url: https://ryanzomorrodi.github.io
-    - icon: fa brands orcid
-      text: 0009-0003-6417-5985
-      url: https://orcid.org/0009-0003-6417-5985
-    - icon: fa brands github
-      text: GitHub
-      url: https://github.com/ryanzomorrodi
-    - icon: fa brands linkedin
-      text: LinkedIn
-      url: https://www.linkedin.com/in/ryanzomorrodi/
-style:
-  color-accent: "000000"
-format: awesomecv-typst
-execute:
-  echo: false
-  warning: false
-  message: false
+title: "Curriculum Vitae"
+format:
+  html:
+    toc: true
+  pdf:
+    author: Ryan Zomorrodi
+    pdf-engine: weasyprint
+css: _assets/cv.css
+format-links: [pdf]
 ---
 
-```{r}
-library(typstcv)
-library(readr)
-```
+::: {.print-only .contact-block}
+rzomor2\@uic.edu
+:::
 
+::: no-print
+*Last updated June 5, 2025*
+:::
 
 ## Education
 
-```{r}
-#| output: asis
+**Master of Science -- Biostatistics**  
+*University of Illinois Chicago* [*Aug 2023 --- May 2025*]{.cvdate}
 
-educ <- read_csv(
-  "_data/cv/education.csv",
-  col_types = cols(
-    start = col_date(format = "%F"),
-    end = col_date(format = "%F"),
-    .default = col_character()
-  )
-)
+-   GPA: 4.00
 
-educ |>
-  format_date(
-    end = "end", 
-    sort_by = "start"
-  ) |>
-  resume_entry(
-    title = "degree",
-    description = "institution",
-    details = c("detail1", "detail2", "detail3", "detail4")
-  )
-```
+**Bachelor of Science -- Biological Science**  
+*University of Illinois Chicago* [*Aug 2019 --- May 2023*]{.cvdate}
+
+-   Minors: Computer Science & Public Health
+-   Graudated with Highest Distinction
+-   Honors College
+-   GPA: 4.00
 
 ## Work Experience
 
-```{r}
-#| output: asis
+**Research Associate**  
+*Children's Environmental Health Initiative* [Jun 2023 --- Present]{.cvdate}
 
-work <- read_csv(
-  "_data/cv/work.csv",
-  col_types = cols(
-    start = col_date(format = "%F"),
-    end = col_date(format = "%F"),
-    .default = col_character()
-  )
-)
+-   Performed geospatial analysis of hospital and physician accessibility utilizing two-step floating catchment area methods.
+-   Developed Rate Stabilizing Toolbox in Python to generate generating reliable, local-level age-standardized measures of chronic disease using the restricted univariate conditional autoregressive (UCAR) bayesian model.
+-   Generated measures of hurricane exposure for 15 severe storms in order facilitate analysis of hurricane exposure effects on mortality amongst elderly individuals.
+-   Instructed state, tribal, and local public health professionals on the use of GIS to assess and address chronic health disparities.
 
-work |>
-  format_date(
-    start = "start",
-    end = "end", 
-    sort_by = "start"
-  ) |>
-  resume_entry(
-    title = "title",
-    description = "institution",
-    details = c("detail1", "detail2", "detail3")
-  )
-```
+## Software
 
-## Skills
+[**socratadata**](project/socratadata/index.qmd)  
+*R package API wrapper that utilzes Rust to parse Socrata datasets into R dataframes. Also features support for Socrata Query Langauge (SoQL) and the Socrata Discovery API.*  
+[**arcpygris**](https://github.com/ryanzomorrodi/arcpygris)  
+*Python toolbox for downloading Census boundaries into an ArcGIS Pro project. Inspired heavily by the R package tigris.*  
+[**sasquatch**](project/sasquatch/index.qmd)  
+*R package that bridges SAS and R. Utilizes the Python package SASPy to enable transfer of data between R and SAS, interactive SAS evaluation, basic remote SAS client file management, and rendering of SAS within quarto/rmarkdown documents.*  
+[**healthatlas**](project/healthatlas/index.qmd)  
+*R package API wrapper for Metopio health atlas data. Allows for easy exploration of health atlas datasets and metadata.*  
+[**centr**](project/centr/index.qmd)  
+*R package that designed to calculate planar or geodesic weighted mean or median spatial centers.*  
+[**Rate Stabilizing Toolbox**](project/rst/index.qmd)  
+*Python toolbox for generating reliable, local-level age-standardized measures of chronic disease using the restricted univariate conditional autoregressive (UCAR) bayesian model.*  
 
-```{r}
-#| output: asis
-skill <- read_csv(
-  "_data/cv/skill.csv",
-  col_types = cols(
-    .default = col_character()
-  )
-)
+## Presentations & Workshops
 
-skill |>
-  resume_entry(
-    title = "title",
-    description = "description"
-  )
-``` 
-
-{{< pagebreak >}}
-
-## Service
-
-```{r}
-#| output: asis
-service <- read_csv(
-  "_data/cv/service.csv",
-  col_types = cols(
-    start = col_date(format = "%F"),
-    end = col_date(format = "%F"),
-    .default = col_character() 
-  )
-)
-
-service |>
-  format_date(
-    start = "start",
-    end = "end", 
-    sort_by = "end"
-  ) |>
-  resume_entry(
-    title = "role",
-    description = "organization"
-  )
-```
-
-## Teaching Experience
-
-```{r}
-#| output: false
-
-teaching_experience <- read_csv(
-  "_data/cv/teaching_experience.csv",
-  col_types = cols(
-    start = col_date(format = "%F"),
-    end = col_date(format = "%F"),
-    .default = col_character()
-  )
-)
-
-teaching_experience |>
-  format_date(
-    start = "start",
-    end = "end", 
-    date_format = "%Ob %d, %y",
-    sort_by = "start"
-  ) |>
-  resume_entry(
-    title = "presentation",
-    description = "organization"
-  )
-```
-
-```{=typst}
-#resume-entry(title: "Using GIS to Study Social Determinants of Health with R",location: link("https://ryanzomorrodi.github.io/NAUTraining/")[Resource Link],date: "Jun 06, 24 - Jun 07, 24",description: "Northern Arizona University Center for Health Equity Research",)
-#resume-entry(title: "State Health Departments Chronic Disease Surveillance",date: "Mar 06, 24 - Jul 31, 24",description: "GIS Capacity Building Project",)
-#resume-entry(title: "An Introduction to ArcGIS Online Mini-Course",date: "Oct 17, 23 - Oct 24, 23",description: "GIS Capacity Building Project",)
-#resume-entry(title: "Tribal Epidemiological Centers Chronic Disease Surveillance",date: "Oct 10, 23 - Jan 31, 24",description: "GIS Capacity Building Project",)
-#resume-entry(title: "A Gentle Introduction to GIS Mini-Course",date: "Sep 19, 23 - Sep 26, 23",description: "GIS Capacity Building Project",)
-```
-
-## Presentations
-
-```{r}
-#| output: false
-
-presentation <- read_csv(
-  "_data/cv/presentation.csv",
-  col_types = cols(
-    date = col_date(format = "%F"),
-    .default = col_character()
-  )
-)
-
-presentation |>
-  format_date(
-    start = "date",
-    sort_by = "start"
-  ) |>
-  resume_entry(
-    title = "title",
-    location = "link",
-    description = "organization",
-  )
-```
-
-```{=typst}
-#resume-entry(title: "RNA-sequencing analysis of Macrophage Hyperactivation",date: "Apr 2023",description: "UIC Undergraduate Research Forum",)
-#resume-entry(title: "Empowering Community Members to Investigate and Address Chicago’s Health Disparities",date: "Nov 2022",description: "American Public Health Association",)
-#resume-entry(title: "Developing Student Workshops to Increase Community Engagement in Addressing Chicago’s Health Disparities",date: "Apr 2022",description: "UIC School of Public Health Research and Scholarship Week Lightning Talks",)
-#resume-entry(title: "Empowering Community Members to Investigate and Address Chicago’s Health Disparities",location: link("https://youtu.be/LRhDg3IVbTM?t=340&si=4LewEO33ysc8VRMN")[Recording Link],date: "Apr 2022",description: "UIC Minority Health Conference",)
-```
+**Enhancing Local Level Surveillance and Data Visualization of Health Outcomes: Introducing a Set of Rate Stabilizing Tools**  
+*Council of State and Territorial Epidemiologists* [*10 Jun 2025*]{.cvdate}  
+**Enhancing Data to Action: Approaches for Using Maps to Address Chronic Disease**  
+*Council of State and Territorial Epidemiologists* [*9 Jun 2025*]{.cvdate}  
+**Encounter with sasquatch: Using SAS, R, and Quarto together**  
+*SAS Open Source Community of Practice* [*25 May 2025*]{.cvdate}  
+[Presentation Link](https://ryanzomorrodi.github.io/talk-sas-cop-sasquatch/)  
+**Using GIS to Study Social Determinants of Health with R**  
+Northern Arizona University Center for Health Equity Research [6 --- 7 Jun 24]{.cvdate}  
+[Resource Link](https://ryanzomorrodi.github.io/NAUTraining/)  
+**An Introduction to ArcGIS Online Mini-Course**  
+*GIS Capacity Building Project* [*17 --- 24 Oct 23*]{.cvdate}  
+**A Gentle Introduction to GIS Mini-Course**  
+*GIS Capacity Building Project* [*19 --- 26 Sep 23*]{.cvdate}  
+**RNA-sequencing analysis of Macrophage Hyperactivation**  
+*UIC Undergraduate Research Forum* [*18 Apr 2023*]{.cvdate}  
+**Empowering Community Members to Investigate and Address Chicago’s Health Disparities**  
+*American Public Health Association* [*9 Nov 2022*]{.cvdate}  
+**Empowering Community Members to Investigate and Address Chicago’s Health Disparities**  
+*UIC Minority Health Conference* [*8 Apr 2022*]{.cvdate}  
+[Recording Link](https://youtu.be/LRhDg3IVbTM?t=340&si=4LewEO33ysc8VRMN)  
+**Developing Student Workshops to Increase Community Engagement in Addressing Chicago’s Health Disparities**  
+*UIC School of Public Health Research and Scholarship Week Lightning Talks* [*22 Apr 2022*]{.cvdate}  
 
 ## Publications
 
-```{r}
-#| output: asis
+**Significance of IL-34 and SDC-1 in the pathogenesis of RA cells and preclinical models**
+*Clinical Immunology* [*May 2023*]{.cvdate}  
+[10.1016/j.clim.2023.109635](https://doi.org/10.1016/j.clim.2023.109635)  
+**Inhibition of IRAK4 dysregulates SARS-CoV-2 spike proteininduced macrophage inflammatory and glycolytic reprogramming**  
+*Cellular and Molecular Life Sciences* [*May 2022*]{.cvdate}  
+[10.1007/s00018-022-04329-8](https://doi.org/10.1007/s00018-022-04329-8)  
+**Metabolic reprogramming of macrophages instigates CCL21-induced arthritis**  
+*Immunology & Cell Biology* [*Dec 2021*]{.cvdate}  
+[10.1111/imcb.12512](https://doi.org/10.1111/imcb.12512)  
+**Metabolic regulation of RA macrophages is distinct from RA fibroblasts and blockade of glycolysis alleviates inflammatory phenotype in both cell types**  
+*Cellular and Molecular Life Sciences* [*Oct 2021*]{.cvdate}  
+[10.1007/s00018-021-03978-5](https://doi.org/10.1007/s00018-021-03978-5)  
+**Interleukin-34 Reprograms Glycolytic and Osteoclastic Rheumatoid Arthritis Macrophages via Syndecan 1 and Macrophage Colony-Stimulating Factor Receptor**  
+*Arthritis & Rheumatology* [*Sep 2021*]{.cvdate}  
+[10.1002/art.41792](https://doi.org/10.1002/art.41792)  
+**Tofacitinib therapy intercepts macrophage metabolic reprogramming instigated by SARS-CoV-2 Spike protein**  
+*European Journal of Immunology* [*Jun 2021*]{.cvdate}  
+[10.1002/eji.202049159](https://doi.org/10.1002/eji.202049159)  
+**CCL25 and CCR9 is a unique pathway that potentiates pannus formation by remodeling RA macrophages into mature osteoclasts**  
+*European Journal of Immunology* [*Jan 2021*]{.cvdate}  
+[10.1002/eji.202048681](https://doi.org/10.1002/eji.202048681)  
+**IRAK4 inhibition: a promising strategy for treating RA joint inflammation and bone erosion**  
+*Cellular & Molecular Immunology* [*May 2020*]{.cvdate}  
+[10.1038/s41423-020-0433-8](https://doi.org/10.1038/s41423-020-0433-8)  
+**Macrophages are the primary effector cells in IL-7-induced arthritis**  
+*Cellular & Molecular Immunology* [*Jun 2019*]{.cvdate}  
+[10.1038/s41423-019-0235-z](https://doi.org/10.1038/s41423-019-0235-z)  
+**Impact of obesity on autoimmune arthritis and its cardiovascular complications**  
+*Autoimmunity Reviews* [*Jun 2018*]{.cvdate}  
+[10.1016/j.autrev.2018.02.007](https://doi.org/10.1016/j.autrev.2018.02.007)  
 
-publication <- read_csv(
-  "_data/cv/publication.csv",
-  col_types = cols(
-    epub_date = col_date(format = "%F"),
-    .default = col_character()
-  )
-)
+## Teaching Experience
 
-publication |>
-  format_date(
-    start = "epub_date",
-    sort_by = "start"
-  ) |>
-  resume_entry(
-    title = "title",
-    description = "journal",
-    details = "doi"
-  )
-```
+**GIS Training for Surveillance of Heart Disease, Stroke, and Other Chronic Diseases in State Health Departments**  
+*GIS Capacity Building Project* [*25 Mar 25 --- 31 Jul 25*]{.cvdate}  
+**Hawaii State Department of Health & University of Hawaiʻi GIS Capacity Building**  
+*GIS Capacity Building Project* [*28 Jan 25 --- 12 Jun 25*]{.cvdate}  
+**Advanced GIS Training for Surveillance of Heart Disease, Stroke and Other Chronic Diseases Among Health Department Staff**  
+*GIS Capacity Building Project* [*13 Nov 24 - 29 Jan 25*]{.cvdate}  
+**State Health Departments Chronic Disease Surveillance**  
+*GIS Capacity Building Project* [*6 Mar 24 --- 31 Jul 24*]{.cvdate}  
+**Tribal Epidemiological Centers Chronic Disease Surveillance**  
+*GIS Capacity Building Project* [*10 Oct 23 --- 31 Jan 24*]{.cvdate}  
 
 ## Honors
 
-```{r}
-#| output: asis
-
-honor <- read_csv(
-  "_data/cv/honor.csv",
-  col_types = cols(
-    awarded = col_date(format = "%F"),
-    .default = col_character()
-  )
-)
-
-honor |>
-  format_date(
-    start = "awarded", 
-    date_format = "%Y", 
-    sort_by = "start") |>
-  resume_entry(
-    description = "institution",
-    title = "honor"
-  )
-```
+**Highest Distinction**  
+*UIC Department of Biological Sciences* [*2023*]{.cvdate}  
+**Pasteur Prize Nominee**  
+*UIC Department of Biological Sciences* [*2023*]{.cvdate}  
+**Research Grant**  
+*UIC Honors College* [*2022*]{.cvdate}  
+**Travel Grant**  
+*UIC Honors College* [*2022*]{.cvdate}  
+**Maurice Prize**  
+*UIC Student Leadership and Civic Engagement* [*2022*]{.cvdate}  
+**Undergraduate Most Outstanding Presentation**  
+*UIC School of Public Health Research Week* [*2022*]{.cvdate}  
+**Chancellor’s Student Service Award**  
+*UIC Student Leadership and Civic Engagement* [*2022*]{.cvdate}  
+**President’s Volunteer Service Award - Bronze**  
+*UIC Student Leadership and Civic Engagement* [*2021*]{.cvdate}  
+**1st place - Division 4**  
+*Collegiate Chess League* [*2021*]{.cvdate}  
+**Chancellor’s Student Service Award**  
+*UIC Student Leadership and Civic Engagement* [*2021*]{.cvdate}  
+**Research Grant**  
+*UIC Honors College* [*2020*]{.cvdate}  
 
 ## Professional Membership
 
-```{r}
-#| output: asis
+**American Public Health Association** [2022]{.cvdate}  
+**Harvard Innovation Lab** [2022 --- 2024]{.cvdate}  
+**Clinton Global Initiative University Fellowship** [2023]{.cvdate}  
+**American Society for Biochemistry and Molecular Biology** [2020 --- 2022]{.cvdate}  
 
-professional_membership <- read_csv(
-  "_data/cv/professional_membership.csv",
-  col_types = cols(
-    start = col_date(format = "%F"),
-    end = col_date(format = "%F"),
-    .default = col_character()
-  )
-)
-
-professional_membership |>
-  format_date(
-    start = "start",
-    end = "end",
-  ) |>
-  resume_entry(
-    title = "organization",
-  )
-```
-
+::: {.no-print .hidden}
 ## Leadership
-```{r}
-#| output: asis
 
-leadership <- read_csv(
-  "_data/cv/leadership.csv",
-  col_types = cols(
-    start = col_date(format = "%Y"),
-    end = col_date(format = "%Y"),
-    .default = col_character()
-  )
-)
+**Secretary**  
+UIC Society of Future Physicians [*2021 --- 2023*]{.cvdate}  
+**President**  
+Chess Club at UIC [*2021 --- 2023*]{.cvdate}  
+**Secretary**  
+UIC American Society for Biochemistry and Molecular Biology [*2021 --- 2022*]{.cvdate}  
+**Media chairman**  
+Spreading Healthcare Awareness through Reciprocal Education (SHARE) [*2020 --- 2022*]{.cvdate}  
+**Student leader**  
+UIC Student Leadership and Civic Engagement [*2019 --- 2022*]{.cvdate}  
+**Chapter representative**  
+UIC American Society for Biochemistry and Molecular Biology [*2020 --- 2021*]{.cvdate}  
+**Vice-president**  
+Chess Club at UIC [*2020 --- 2021*]{.cvdate}  
+:::
 
-leadership |>
-  format_date(
-    start = "start",
-    end = "end",
-    date_format = "%Y"
-  ) |>
-  resume_entry(
-    title = "role",
-    description = "organization"
-  )
-```
+
+::: print-only
+## References
+
+Available upon request
+:::

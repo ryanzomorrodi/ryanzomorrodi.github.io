@@ -8,6 +8,7 @@ listing:
     - subtitle
     - date
     - image
+    - categories
   sort: "date desc"
   image-height: 280px;
 format: 
