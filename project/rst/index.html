@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.30">
+<meta name="generator" content="quarto-1.6.40">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Ryan Zomorrodi">
 <meta name="dcterms.date" content="2024-07-18">
 
-<title>Rate Stabilizing Tool 2 – Ryan Zomorrodi</title>
+<title>Rate Stabilizing Toolbox – Ryan Zomorrodi</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -33,10 +33,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-3a01e2046221230fdceeea94b1ec5d67.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-cae1f1486ff212cc08c89ce7ab46ac7b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-d5399677574ac022c5388d168651efab.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "language": {
     "search-no-results-text": "No results",
@@ -73,7 +73,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../cv.pdf"> 
+    <a class="nav-link" href="../../cv.html"> 
 <span class="menu-text">CV</span></a>
   </li>  
   <li class="nav-item">
@@ -100,9 +100,15 @@ ul.task-list li input[type="checkbox"] {
 <!--- from: https://github.com/gadenbuie/garrickadenbuie-com/blob/4c414df0128e74a029b32a15e668298b87a84f9b/_partials/title-block-link-buttons/title-block.html -->
 <header id="title-block-header" class="quarto-title-block default">
     <div class="quarto-title">
-    <h1 class="title">Rate Stabilizing Tool 2</h1>
+    <h1 class="title">Rate Stabilizing Toolbox</h1>
         <p class="subtitle lead">Small Area Estimation ArcGIS Pro Python Toolbox</p>
-            </div>
+                  <div class="quarto-categories">
+            <div class="quarto-category">Python</div>
+            <div class="quarto-category">ArcGIS Pro</div>
+            <div class="quarto-category">Bayesian</div>
+            <div class="quarto-category">GIS</div>
+          </div>
+              </div>
     
         
     
@@ -129,15 +135,16 @@ ul.task-list li input[type="checkbox"] {
     
         
         <div class="mt-4 d-flex flex-row flex-wrap gap-1 justify-content-center justify-content-sm-start" role="group" aria-label="Talk Links">
-        <a href="https://github.com/CEHI-code-repos/RateStabilizingTool2/" class="btn btn-secondary"><i class="bi bi-github me-1"></i> Source</a>
+        <a href="https://github.com/CEHI-code-repos/RateStabilizingToolbox/" class="btn btn-secondary"><i class="bi bi-github me-1"></i> Source</a>
         </div>
         
     </header>
 
 
-<p>The Rate Stabilizing Tool(box) 2 is an ArcGIS Pro python toolbox for generating reliable, local-level age-standardized measures of chronic disease developed from scratch in partnership with the Centers for Disease Control and Prevention to replace the original Rate Stabilizing Tool.</p>
-<p>It composed of two tools:</p>
+<p>The Rate Stabilizing Toolbox (RSTbx) is an ArcGIS Pro Python toolbox for generating reliable, local-level age-standardized measures of chronic disease developed from scratch in partnership with the Centers for Disease Control and Prevention to replace the original Rate Stabilizing Tool.</p>
+<p>It composed of three tools:</p>
 <ul>
+<li>Census Data Retriever Tool (CDR): Utilizes the Census API to download county or tract-level population tables (optionally stratified by age) along with boundary files from the Census HTTP server.</li>
 <li>Individual Data Processing Tool (IDP): Aggregates individual data to an optionally age stratified population table and preforms checks to warn user if input data is invalid.</li>
 <li>Rate Stabilizing Tool (RST): Utilizes a restricted CAR model to generate optionally age adjusted rates for local areas given the population data from the IDP and a geographic layer.</li>
 </ul>
@@ -228,8 +235,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -340,7 +345,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {

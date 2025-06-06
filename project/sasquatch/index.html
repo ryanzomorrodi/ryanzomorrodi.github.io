@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.30">
+<meta name="generator" content="quarto-1.6.40">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -33,10 +33,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-3a01e2046221230fdceeea94b1ec5d67.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-cae1f1486ff212cc08c89ce7ab46ac7b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-d5399677574ac022c5388d168651efab.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "language": {
     "search-no-results-text": "No results",
@@ -73,7 +73,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../cv.pdf"> 
+    <a class="nav-link" href="../../cv.html"> 
 <span class="menu-text">CV</span></a>
   </li>  
   <li class="nav-item">
@@ -102,7 +102,14 @@ ul.task-list li input[type="checkbox"] {
     <div class="quarto-title">
     <h1 class="title">sasquatch</h1>
         <p class="subtitle lead">Use SAS, R, and Quarto together</p>
-            </div>
+                  <div class="quarto-categories">
+            <div class="quarto-category">R</div>
+            <div class="quarto-category">SAS</div>
+            <div class="quarto-category">Python</div>
+            <div class="quarto-category">reticulate</div>
+            <div class="quarto-category">SASPy</div>
+          </div>
+              </div>
     
         
     
@@ -131,6 +138,7 @@ ul.task-list li input[type="checkbox"] {
         <div class="mt-4 d-flex flex-row flex-wrap gap-1 justify-content-center justify-content-sm-start" role="group" aria-label="Talk Links">
         <a href="https://ryanzomorrodi.github.io/sasquatch/" class="btn btn-secondary"><i class="bi bi-book me-1"></i> Docs</a>
         <a href="https://github.com/ryanzomorrodi/sasquatch/" class="btn btn-secondary"><i class="bi bi-github me-1"></i> Source</a>
+        <a href="https://github.com/ropensci/software-review/issues/673" class="btn btn-secondary"><i class="bi bi-pencil-square me-1"></i> rOpenSci Peer Review</a>
         </div>
         
     </header>
@@ -139,7 +147,7 @@ ul.task-list li input[type="checkbox"] {
 <p>I have had to do a fair number of assignments in SAS, and whenever I did I missed the ability to simply include all my code and my comments in a single reproducable rmarkdown/quarto document. When I first came across <a href="https://www.youtube.com/watch?v=4c9T6-__vI8">this presentation</a> by Johann Laurent, I became excited. BaselR had introduced a package, <a href="https://github.com/baselr/configSAS"><code>configSAS</code></a> that allowed me to use SAS with all the nicities that come with quarto!</p>
 <p>When I set <code>configSAS</code> up, I became a little disappointed. There was no syntax highlighting, the SAS output’s CSS caused weird styling behavior throughout the rest of the quarto document, and I couldn’t see any SAS output unless I rendered the entire quarto document over again. Still, I thought this was better than nothing. I continued to use <code>configSAS</code> for almost a year until I decided there had to be a better way. That’s what <code>sasquatch</code> aims to be.</p>
 <p><code>sasquatch</code> gives you the ability to work with SAS interactively just as you would R or Python, but within your R IDE of choice. And it allows you render beautiful quarto documents with syntax highlighting. You can even send tables between R and SAS to do your analysis in whatever language is easiest!</p>
-<p>I won’t lie, a few of the solutions I had to use were a little janky. Syntax highlighting is provided by a separate xml file specified in the quarto options. The SAS output is rendered inside an iframe, which is dynamically resized to fit its contents using a javascript library linked in the quarto options and within each iframe. Hopefully, I can think of more elegant solutions to these problems, but in the mean time, check it out!</p>
+<p><strong>Update:</strong> I was invited to give a presentation on the origin and inner workings of <code>sasquatch</code> at the May 29th, 2025 SAS Open Source Community of Practice. You can see my presentation <a href="">here</a>.</p>
 
 
 
@@ -226,8 +234,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -338,7 +344,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {

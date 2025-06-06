@@ -1,7 +1,8 @@
 [
   {
-    "listing": "/project/index.html",
+    "listing": "/index.html",
     "items": [
+      "/project/socratadata/index.html",
       "/project/sasquatch/index.html",
       "/project/healthatlas/index.html",
       "/project/centr/index.html",
@@ -10,8 +11,9 @@
     ]
   },
   {
-    "listing": "/index.html",
+    "listing": "/project/index.html",
     "items": [
+      "/project/socratadata/index.html",
       "/project/sasquatch/index.html",
       "/project/healthatlas/index.html",
       "/project/centr/index.html",

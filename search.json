@@ -39,7 +39,7 @@
     "href": "project/sasquatch/index.html",
     "title": "sasquatch",
     "section": "",
-    "text": "I have had to do a fair number of assignments in SAS, and whenever I did I missed the ability to simply include all my code and my comments in a single reproducable rmarkdown/quarto document. When I first came across this presentation by Johann Laurent, I became excited. BaselR had introduced a package, configSAS that allowed me to use SAS with all the nicities that come with quarto!\nWhen I set configSAS up, I became a little disappointed. There was no syntax highlighting, the SAS output’s CSS caused weird styling behavior throughout the rest of the quarto document, and I couldn’t see any SAS output unless I rendered the entire quarto document over again. Still, I thought this was better than nothing. I continued to use configSAS for almost a year until I decided there had to be a better way. That’s what sasquatch aims to be.\nsasquatch gives you the ability to work with SAS interactively just as you would R or Python, but within your R IDE of choice. And it allows you render beautiful quarto documents with syntax highlighting. You can even send tables between R and SAS to do your analysis in whatever language is easiest!\nI won’t lie, a few of the solutions I had to use were a little janky. Syntax highlighting is provided by a separate xml file specified in the quarto options. The SAS output is rendered inside an iframe, which is dynamically resized to fit its contents using a javascript library linked in the quarto options and within each iframe. Hopefully, I can think of more elegant solutions to these problems, but in the mean time, check it out!"
+    "text": "I have had to do a fair number of assignments in SAS, and whenever I did I missed the ability to simply include all my code and my comments in a single reproducable rmarkdown/quarto document. When I first came across this presentation by Johann Laurent, I became excited. BaselR had introduced a package, configSAS that allowed me to use SAS with all the nicities that come with quarto!\nWhen I set configSAS up, I became a little disappointed. There was no syntax highlighting, the SAS output’s CSS caused weird styling behavior throughout the rest of the quarto document, and I couldn’t see any SAS output unless I rendered the entire quarto document over again. Still, I thought this was better than nothing. I continued to use configSAS for almost a year until I decided there had to be a better way. That’s what sasquatch aims to be.\nsasquatch gives you the ability to work with SAS interactively just as you would R or Python, but within your R IDE of choice. And it allows you render beautiful quarto documents with syntax highlighting. You can even send tables between R and SAS to do your analysis in whatever language is easiest!\nUpdate: I was invited to give a presentation on the origin and inner workings of sasquatch at the May 29th, 2025 SAS Open Source Community of Practice. You can see my presentation here."
   },
   {
     "objectID": "project/centr/index.html",
@@ -47,27 +47,6 @@
     "title": "centr",
     "section": "",
     "text": "centr is a package designed to calculate population weighted mean or median spatial centers. Mean centers can be calculated for projected and lon lat geometries. centr assumes a spherical representation of the earth for lon lat geometries, similar to S2.\nPopulation weighted centroids are a powerful tool to calculate plausible population exposure measures, and I use them quite a bit in my work. Now with centr calculating population weighted centroids within R is easy and fast."
-  },
-  {
-    "objectID": "project/index.html",
-    "href": "project/index.html",
-    "title": "Projects",
-    "section": "",
-    "text": "sasquatch\n\n\nUse SAS, R, and Quarto together\n\n\n\nNov 16, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nhealthatlas\n\n\nExplore and Import Metopio Powered Health Atlases\n\n\n\nSep 13, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncentr\n\n\nA Package for Weighted and Unweighted Spatial Centers\n\n\n\nJul 21, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRate Stabilizing Tool 2\n\n\nSmall Area Estimation ArcGIS Pro Python Toolbox\n\n\n\nJul 18, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPA 470\n\n\nMachine Learning in the Public Sector\n\n\n\nApr 27, 2024\n\n\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Ryan Zomorrodi",
-    "section": "",
-    "text": "Hi, I'm \n\n  \n    \n      Ryan Zomorrodi\n      a Data Analyst\n      an OSS Enthusiast\n      an R Nerd\n     \n  \n\n\n  \n  \n  \n\n\n\nI’m an data analyst working for the Children’s Environmental Health Initiative and an MS in Health Analytics student at University of Illinois Chicago. I enjoy utilizing data to solve complex problems and making tools that make data analysis easier."
-  },
-  {
-    "objectID": "index.html#latest-projects",
-    "href": "index.html#latest-projects",
-    "title": "Ryan Zomorrodi",
-    "section": "Latest Projects",
-    "text": "Latest Projects\n\n\n\n\n\n\n\n\n\n\nsasquatch\n\n\nUse SAS, R, and Quarto together\n\n\n\nNov 16, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nhealthatlas\n\n\nExplore and Import Metopio Powered Health Atlases\n\n\n\nSep 13, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncentr\n\n\nA Package for Weighted and Unweighted Spatial Centers\n\n\n\nJul 21, 2024\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "project/healthatlas/index.html",
@@ -84,11 +63,116 @@
     "text": "PA 470 - Artificial Intelligence and Machine Learning in the Public Sector is a course taught by Eric Langowski as a part of the Civic Analytics curriculum at UIC. In the course, we worked through building an machine learning model to predict the sale prices of Cook county single family homes.\nFor my final project, I decided to do a replication study of Estimated Childhood Lead Exposure From Drinking Water in Chicago (Huynh et al., 2024). In the process, I learned a ton about Chicago’s lead contaminated water issues (Did you know that lead service lines were MANDATED by the city of Chicago until 1986 and as a result Chicago has 400,000 lead service lines).\nThe modeling involved a ton of data cleaning to aggregate data from the City of Chicago Department of Water Management Lead Test data, US Decennial Census, American Community Survey, Chicago Data Portal, and Chicago Health Atlas. Unfortunately, predicting lead exposure at the block level for a city as big as Chicago is quite a big problem. In the end I limited my models to elastic net logistic regression and random forest and limited my area of interest to the West Side of Chicago. But it was definitely a cool project, and you can check out my work at the above website."
   },
   {
+    "objectID": "cv.html",
+    "href": "cv.html",
+    "title": "Curriculum Vitae",
+    "section": "",
+    "text": "rzomor2@uic.edu"
+  },
+  {
+    "objectID": "cv.html#education",
+    "href": "cv.html#education",
+    "title": "Curriculum Vitae",
+    "section": "Education",
+    "text": "Education\nMaster of Science – Biostatistics\nUniversity of Illinois Chicago Aug 2023 — May 2025\n\nGPA: 4.00\n\nBachelor of Science – Biological Science\nUniversity of Illinois Chicago Aug 2019 — May 2023\n\nMinors: Computer Science & Public Health\nGraudated with Highest Distinction\nHonors College\nGPA: 4.00"
+  },
+  {
+    "objectID": "cv.html#work-experience",
+    "href": "cv.html#work-experience",
+    "title": "Curriculum Vitae",
+    "section": "Work Experience",
+    "text": "Work Experience\nResearch Associate\nChildren’s Environmental Health Initiative Jun 2023 — Present\n\nPerformed geospatial analysis of hospital and physician accessibility utilizing two-step floating catchment area methods.\nDeveloped Rate Stabilizing Toolbox in Python to generate generating reliable, local-level age-standardized measures of chronic disease using the restricted univariate conditional autoregressive (UCAR) bayesian model.\nGenerated measures of hurricane exposure for 15 severe storms in order facilitate analysis of hurricane exposure effects on mortality amongst elderly individuals.\nInstructed state, tribal, and local public health professionals on the use of GIS to assess and address chronic health disparities."
+  },
+  {
+    "objectID": "cv.html#software",
+    "href": "cv.html#software",
+    "title": "Curriculum Vitae",
+    "section": "Software",
+    "text": "Software\nsocratadata\nR package API wrapper that utilzes Rust to parse Socrata datasets into R dataframes. Also features support for Socrata Query Langauge (SoQL) and the Socrata Discovery API.\narcpygris\nPython toolbox for downloading Census boundaries into an ArcGIS Pro project. Inspired heavily by the R package tigris.\nsasquatch\nR package that bridges SAS and R. Utilizes the Python package SASPy to enable transfer of data between R and SAS, interactive SAS evaluation, basic remote SAS client file management, and rendering of SAS within quarto/rmarkdown documents.\nhealthatlas\nR package API wrapper for Metopio health atlas data. Allows for easy exploration of health atlas datasets and metadata.\ncentr\nR package that designed to calculate planar or geodesic weighted mean or median spatial centers.\nRate Stabilizing Toolbox\nPython toolbox for generating reliable, local-level age-standardized measures of chronic disease using the restricted univariate conditional autoregressive (UCAR) bayesian model."
+  },
+  {
+    "objectID": "cv.html#presentations-workshops",
+    "href": "cv.html#presentations-workshops",
+    "title": "Curriculum Vitae",
+    "section": "Presentations & Workshops",
+    "text": "Presentations & Workshops\nEnhancing Local Level Surveillance and Data Visualization of Health Outcomes: Introducing a Set of Rate Stabilizing Tools\nCouncil of State and Territorial Epidemiologists 10 Jun 2025\nEnhancing Data to Action: Approaches for Using Maps to Address Chronic Disease\nCouncil of State and Territorial Epidemiologists 9 Jun 2025\nEncounter with sasquatch: Using SAS, R, and Quarto together\nSAS Open Source Community of Practice 25 May 2025\nPresentation Link\nUsing GIS to Study Social Determinants of Health with R\nNorthern Arizona University Center for Health Equity Research 6 — 7 Jun 24\nResource Link\nAn Introduction to ArcGIS Online Mini-Course\nGIS Capacity Building Project 17 — 24 Oct 23\nA Gentle Introduction to GIS Mini-Course\nGIS Capacity Building Project 19 — 26 Sep 23\nRNA-sequencing analysis of Macrophage Hyperactivation\nUIC Undergraduate Research Forum 18 Apr 2023\nEmpowering Community Members to Investigate and Address Chicago’s Health Disparities\nAmerican Public Health Association 9 Nov 2022\nEmpowering Community Members to Investigate and Address Chicago’s Health Disparities\nUIC Minority Health Conference 8 Apr 2022\nRecording Link\nDeveloping Student Workshops to Increase Community Engagement in Addressing Chicago’s Health Disparities\nUIC School of Public Health Research and Scholarship Week Lightning Talks 22 Apr 2022"
+  },
+  {
+    "objectID": "cv.html#publications",
+    "href": "cv.html#publications",
+    "title": "Curriculum Vitae",
+    "section": "Publications",
+    "text": "Publications\nSignificance of IL-34 and SDC-1 in the pathogenesis of RA cells and preclinical models Clinical Immunology May 2023\n10.1016/j.clim.2023.109635\nInhibition of IRAK4 dysregulates SARS-CoV-2 spike proteininduced macrophage inflammatory and glycolytic reprogramming\nCellular and Molecular Life Sciences May 2022\n10.1007/s00018-022-04329-8\nMetabolic reprogramming of macrophages instigates CCL21-induced arthritis\nImmunology & Cell Biology Dec 2021\n10.1111/imcb.12512\nMetabolic regulation of RA macrophages is distinct from RA fibroblasts and blockade of glycolysis alleviates inflammatory phenotype in both cell types\nCellular and Molecular Life Sciences Oct 2021\n10.1007/s00018-021-03978-5\nInterleukin-34 Reprograms Glycolytic and Osteoclastic Rheumatoid Arthritis Macrophages via Syndecan 1 and Macrophage Colony-Stimulating Factor Receptor\nArthritis & Rheumatology Sep 2021\n10.1002/art.41792\nTofacitinib therapy intercepts macrophage metabolic reprogramming instigated by SARS-CoV-2 Spike protein\nEuropean Journal of Immunology Jun 2021\n10.1002/eji.202049159\nCCL25 and CCR9 is a unique pathway that potentiates pannus formation by remodeling RA macrophages into mature osteoclasts\nEuropean Journal of Immunology Jan 2021\n10.1002/eji.202048681\nIRAK4 inhibition: a promising strategy for treating RA joint inflammation and bone erosion\nCellular & Molecular Immunology May 2020\n10.1038/s41423-020-0433-8\nMacrophages are the primary effector cells in IL-7-induced arthritis\nCellular & Molecular Immunology Jun 2019\n10.1038/s41423-019-0235-z\nImpact of obesity on autoimmune arthritis and its cardiovascular complications\nAutoimmunity Reviews Jun 2018\n10.1016/j.autrev.2018.02.007"
+  },
+  {
+    "objectID": "cv.html#teaching-experience",
+    "href": "cv.html#teaching-experience",
+    "title": "Curriculum Vitae",
+    "section": "Teaching Experience",
+    "text": "Teaching Experience\nGIS Training for Surveillance of Heart Disease, Stroke, and Other Chronic Diseases in State Health Departments\nGIS Capacity Building Project 25 Mar 25 — 31 Jul 25\nHawaii State Department of Health & University of Hawaiʻi GIS Capacity Building\nGIS Capacity Building Project 28 Jan 25 — 12 Jun 25\nAdvanced GIS Training for Surveillance of Heart Disease, Stroke and Other Chronic Diseases Among Health Department Staff\nGIS Capacity Building Project 13 Nov 24 - 29 Jan 25\nState Health Departments Chronic Disease Surveillance\nGIS Capacity Building Project 6 Mar 24 — 31 Jul 24\nTribal Epidemiological Centers Chronic Disease Surveillance\nGIS Capacity Building Project 10 Oct 23 — 31 Jan 24"
+  },
+  {
+    "objectID": "cv.html#honors",
+    "href": "cv.html#honors",
+    "title": "Curriculum Vitae",
+    "section": "Honors",
+    "text": "Honors\nHighest Distinction\nUIC Department of Biological Sciences 2023\nPasteur Prize Nominee\nUIC Department of Biological Sciences 2023\nResearch Grant\nUIC Honors College 2022\nTravel Grant\nUIC Honors College 2022\nMaurice Prize\nUIC Student Leadership and Civic Engagement 2022\nUndergraduate Most Outstanding Presentation\nUIC School of Public Health Research Week 2022\nChancellor’s Student Service Award\nUIC Student Leadership and Civic Engagement 2022\nPresident’s Volunteer Service Award - Bronze\nUIC Student Leadership and Civic Engagement 2021\n1st place - Division 4\nCollegiate Chess League 2021\nChancellor’s Student Service Award\nUIC Student Leadership and Civic Engagement 2021\nResearch Grant\nUIC Honors College 2020"
+  },
+  {
+    "objectID": "cv.html#professional-membership",
+    "href": "cv.html#professional-membership",
+    "title": "Curriculum Vitae",
+    "section": "Professional Membership",
+    "text": "Professional Membership\nAmerican Public Health Association 2022\nHarvard Innovation Lab 2022 — 2024\nClinton Global Initiative University Fellowship 2023\nAmerican Society for Biochemistry and Molecular Biology 2020 — 2022"
+  },
+  {
+    "objectID": "cv.html#leadership",
+    "href": "cv.html#leadership",
+    "title": "Curriculum Vitae",
+    "section": "Leadership",
+    "text": "Leadership\nSecretary\nUIC Society of Future Physicians 2021 — 2023\nPresident\nChess Club at UIC 2021 — 2023\nSecretary\nUIC American Society for Biochemistry and Molecular Biology 2021 — 2022\nMedia chairman\nSpreading Healthcare Awareness through Reciprocal Education (SHARE) 2020 — 2022\nStudent leader\nUIC Student Leadership and Civic Engagement 2019 — 2022\nChapter representative\nUIC American Society for Biochemistry and Molecular Biology 2020 — 2021\nVice-president\nChess Club at UIC 2020 — 2021"
+  },
+  {
+    "objectID": "cv.html#references",
+    "href": "cv.html#references",
+    "title": "Curriculum Vitae",
+    "section": "References",
+    "text": "References\nAvailable upon request"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Ryan Zomorrodi",
+    "section": "",
+    "text": "Hi, I'm \n\n  \n    \n      Ryan Zomorrodi\n      a Data Analyst\n      an OSS Enthusiast\n      an R Nerd\n     \n  \n\n\n  \n  \n  \n\n\n\nI’m an data analyst working for the Children’s Environmental Health Initiative and an MS in Health Analytics student at University of Illinois Chicago. I enjoy utilizing data to solve complex problems and making tools that make data analysis easier."
+  },
+  {
+    "objectID": "index.html#latest-projects",
+    "href": "index.html#latest-projects",
+    "title": "Ryan Zomorrodi",
+    "section": "Latest Projects",
+    "text": "Latest Projects\n\n\n\n\n\n\n\n\n\n\nsocratadata\n\n\nExplore and Import Socrata Data\n\n\n\nR\n\n\nRust\n\n\nSQL\n\n\nAPI\n\n\nhttr2\n\n\n\n\nMay 5, 2025\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nsasquatch\n\n\nUse SAS, R, and Quarto together\n\n\n\nR\n\n\nSAS\n\n\nPython\n\n\nreticulate\n\n\nSASPy\n\n\n\n\nNov 16, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nhealthatlas\n\n\nExplore and Import Metopio Powered Health Atlases\n\n\n\nR\n\n\nAPI\n\n\nhttr2\n\n\n\n\nSep 13, 2024\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
     "objectID": "project/rst/index.html",
     "href": "project/rst/index.html",
-    "title": "Rate Stabilizing Tool 2",
+    "title": "Rate Stabilizing Toolbox",
     "section": "",
-    "text": "The Rate Stabilizing Tool(box) 2 is an ArcGIS Pro python toolbox for generating reliable, local-level age-standardized measures of chronic disease developed from scratch in partnership with the Centers for Disease Control and Prevention to replace the original Rate Stabilizing Tool.\nIt composed of two tools:\n\nIndividual Data Processing Tool (IDP): Aggregates individual data to an optionally age stratified population table and preforms checks to warn user if input data is invalid.\nRate Stabilizing Tool (RST): Utilizes a restricted CAR model to generate optionally age adjusted rates for local areas given the population data from the IDP and a geographic layer.\n\nIt improves on the original RST by radically simplifying the interface, speeding up estimatation time, and providing better error/warning messaging."
+    "text": "The Rate Stabilizing Toolbox (RSTbx) is an ArcGIS Pro Python toolbox for generating reliable, local-level age-standardized measures of chronic disease developed from scratch in partnership with the Centers for Disease Control and Prevention to replace the original Rate Stabilizing Tool.\nIt composed of three tools:\n\nCensus Data Retriever Tool (CDR): Utilizes the Census API to download county or tract-level population tables (optionally stratified by age) along with boundary files from the Census HTTP server.\nIndividual Data Processing Tool (IDP): Aggregates individual data to an optionally age stratified population table and preforms checks to warn user if input data is invalid.\nRate Stabilizing Tool (RST): Utilizes a restricted CAR model to generate optionally age adjusted rates for local areas given the population data from the IDP and a geographic layer.\n\nIt improves on the original RST by radically simplifying the interface, speeding up estimatation time, and providing better error/warning messaging."
+  },
+  {
+    "objectID": "project/socratadata/index.html",
+    "href": "project/socratadata/index.html",
+    "title": "socratadata",
+    "section": "",
+    "text": "socratadata is an unofficial R wrapper around the Socrata Data, Metadata, and Discovery APIs which utilizes Rust 🦀 to parse Socrata datatypes into R columns. The City of Chicago currently maintains another R package, socratadata improves upon the existing RSocrata package by introducing support for the Socrata Discovery API and all Socrata datatypes. Additionally, socratadata allows for easy use of Socrata Query Language (SoQL).\nBetween socratadata and healthatlas, you can easily import any dataset into R from both Chicago’s major data repositories, the Chicago Data Portal and Chicago Health Atlas. And countless other government data repositories are supported, like the Centers for Disease Control & Prevention, U.S. Department of Transportation, and many more."
+  },
+  {
+    "objectID": "project/index.html",
+    "href": "project/index.html",
+    "title": "Projects",
+    "section": "",
+    "text": "socratadata\n\n\nExplore and Import Socrata Data\n\n\n\nR\n\n\nRust\n\n\nSQL\n\n\nAPI\n\n\nhttr2\n\n\n\n\nMay 5, 2025\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nsasquatch\n\n\nUse SAS, R, and Quarto together\n\n\n\nR\n\n\nSAS\n\n\nPython\n\n\nreticulate\n\n\nSASPy\n\n\n\n\nNov 16, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nhealthatlas\n\n\nExplore and Import Metopio Powered Health Atlases\n\n\n\nR\n\n\nAPI\n\n\nhttr2\n\n\n\n\nSep 13, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncentr\n\n\nA Package for Weighted and Unweighted Spatial Centers\n\n\n\nR\n\n\nGIS\n\n\n\n\nJul 21, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRate Stabilizing Toolbox\n\n\nSmall Area Estimation ArcGIS Pro Python Toolbox\n\n\n\nPython\n\n\nArcGIS Pro\n\n\nBayesian\n\n\nGIS\n\n\n\n\nJul 18, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPA 470\n\n\nMachine Learning in the Public Sector\n\n\n\nR\n\n\nMachine Learning\n\n\ntidymodels\n\n\nGIS\n\n\n\n\nApr 27, 2024\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "notes/index.html",
