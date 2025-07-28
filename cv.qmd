@@ -43,6 +43,31 @@ rzomor2\@uic.edu
 -   Generated measures of hurricane exposure for 15 severe storms in order facilitate analysis of hurricane exposure effects on mortality amongst elderly individuals.
 -   Instructed state, tribal, and local public health professionals on the use of GIS to assess and address chronic health disparities.
 
+**Pharmacy Technician**  
+*Walgreens*	[July 2021 --- Jun 2023]{.cvdate}
+
+-   Utilized electronic health records software to access patient medical records, input insurance, allergy, and health condition records, and resolve patient inquiries.
+-   Resolved insurance inquiries and resubmitted claims in order to ensure patient prescription adherence.
+-   Filled, mixed, and dispensed prescriptions for approval by pharmacists.
+
+## Research Experience
+
+**Independent Project**  
+*Geoadvocates* [Dec 2021 --- Jun 2024]{.cvdate}
+
+-   Designed, in collaboration with another student, a two-part workshop series curriculum to teach students within multiple classes outlining medical deserts within Chicago and how students can utilize Geographic Information Systems (GIS) to expose Chicago health disparities.
+-   Presented to several UIC courses (SOC251, PUBH100, US101, SOC100, and PPOL100) and registered student organizations.
+-   Designed, collected, and analyzed survey data taken from participants before and after each workshop.
+-   Discussed findings at conferences including the UIC Minority Health Conference and UIC School of Public Health Research and Scholarship Week Lightning Talks.
+
+**Research Assistant**  
+*Department of Rheumatology, University of Illinois at Chicago* [Jul 2018 --- May 2023]{.cvdate}
+
+-   Conducted and oversaw experimental techniques such as ELISA and qRT-PCR.
+-   Independently, recorded and analyzed experimental data using both Excel & R.
+-   Relayed analyses to principal investigator & discussed findings.
+-   Implemented bioinformatic analysis of RNA-seq data including differential expression, weighted network gene correlation analysis (WGNCA), Passing Attributes between Networks for Data Assimilation (PANDA), and more.
+
 ## Software
 
 [**socratadata**](project/socratadata/index.qmd)  
@@ -60,6 +85,8 @@ rzomor2\@uic.edu
 
 ## Presentations & Workshops
 
+**Beyond the eye of the storm: why localized, multi-dimensional aspects of severe weather exposure matter for vulnerable, older adult populations**  
+*CAFE: Hurricanes & Health: Understanding Risks and Fostering Resilience* [*4 Aug 2025*]{.cvdate}  
 **Enhancing Local Level Surveillance and Data Visualization of Health Outcomes: Introducing a Set of Rate Stabilizing Tools**  
 *Council of State and Territorial Epidemiologists* [*10 Jun 2025*]{.cvdate}  
 **Enhancing Data to Action: Approaches for Using Maps to Address Chronic Disease**  
