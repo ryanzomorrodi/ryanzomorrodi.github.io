@@ -1,0 +1,31 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "Ryan Zomorrodi"
+  search: false
+  navbar:
+    pinned: true
+  page-footer:
+    center:
+      - icon: linkedin
+        href: https://www.linkedin.com/in/ryanzomorrodi/
+      - icon: mastodon
+        href: https://www.linkedin.com/in/ryanzomorrodi/
+      - icon: bluesky
+        href: https://bsky.app/profile/ryanzomorrodi.bsky.social
+      - icon: github
+        href: https://github.com/ryanzomorrodi
+      - icon: rocket-takeoff
+        href: https://ryanzomorrodi.r-universe.dev/builds
+
+format:
+  html:
+    theme:
+      light: [flatly, theme-light.scss]
+      dark: [darkly, theme-dark.scss]
+    css: styles.css
+    smooth-scroll: true
+    code-copy: true
+    code-link: true

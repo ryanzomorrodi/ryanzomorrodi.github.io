@@ -1,0 +1,84 @@
+/*-- scss:defaults --*/
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
+$body-bg:      #0e141b;
+$body-color:   #e1e7ec;
+$border-color: #1f2d3d;
+
+$primary:      #5b9bd5; 
+$secondary:    #43aa8b; 
+$success:      #43aa8b;
+$info:         #30638E; 
+$warning:      #e0a96d;
+$link-color:   $primary;
+
+$navbar-bg:    #131b24;
+$navbar-fg:    $body-color;
+$footer-bg:    #131b24;
+$footer-fg:    $body-color;
+
+$code-color:   #79b8ff;
+$code-bg:      #16202c;
+
+$font-family-sans-serif: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+$font-family-monospace:  "JetBrains Mono", SFMono-Regular, Menlo, monospace;
+$headings-font-family:   "Plus Jakarta Sans", "Inter", sans-serif;
+$headings-font-weight:   700;
+$presentation-h1-font-size: 2.6rem;
+
+$table-border-color: $border-color;
+$blockquote-font-size: 1rem;
+
+/*-- scss:rules --*/
+
+body {
+  color-scheme: dark;
+}
+
+.navbar {
+  box-shadow: 0 1px 0 0 $border-color;
+}
+
+h1, h2, h3 {
+  letter-spacing: -0.01em;
+}
+
+a {
+  text-underline-offset: 3px;
+}
+
+blockquote {
+  border-left: 3px solid $primary;
+  padding-left: 1rem;
+  color: color-mix(in srgb, $body-color 80%, $body-bg);
+  font-style: italic;
+}
+
+pre, code {
+  border-radius: 6px;
+}
+
+pre.sourceCode {
+  border: 1px solid $border-color;
+}
+
+hr {
+  border-top: 1px solid $border-color;
+  opacity: 1;
+}
+
+::selection {
+  background: color-mix(in srgb, $primary 30%, transparent);
+}
+
+.sidebar-title, .navbar-title {
+  font-family: $headings-font-family;
+  font-weight: 700;
+}
+
+.home-page {
+  .scrolling-words-box ul li {
+    color: $primary;
+  }
+}

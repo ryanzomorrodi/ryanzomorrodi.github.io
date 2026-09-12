@@ -1,0 +1,74 @@
+html {
+  transition: background-color 0.2s ease;
+}
+
+body,
+.navbar,
+.sidebar,
+footer,
+pre,
+code,
+.card {
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.quarto-title-banner {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.quarto-color-scheme-toggle {
+  opacity: 0.85;
+}
+.quarto-color-scheme-toggle:hover {
+  opacity: 1;
+}
+
+.home-page {
+  .quarto-title .title {
+      display: none;
+  }
+
+  .scrolling-words-container {
+      display: flex;
+      font-size: 2rem;
+      font-weight: 800; 
+  }
+
+  .scrolling-words-box {
+      height: 3rem;
+      overflow: hidden;
+  }
+
+  .scrolling-words-box ul {
+    margin: 0;
+    padding: 0;
+    animation: scrollUp 6s;
+  }
+
+  .scrolling-words-box ul li {
+    display: flex;
+    justify-content: flex-start;
+    height: 3rem;
+    list-style: none; 
+  }
+}
+
+@keyframes scrollUp {
+  0% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+  25% {
+    -webkit-transform: translateY(-25%);
+            transform: translateY(-25%);
+  }
+  50% {
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+  }
+  75% {
+    -webkit-transform: translateY(-75%);
+            transform: translateY(-75%);
+  }
+}

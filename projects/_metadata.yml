@@ -1,0 +1,4 @@
+format: 
+  html: 
+    template-partials: 
+      - ../_assets/partials/title-block-link-buttons/title-block.html
