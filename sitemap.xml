@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://ryanzomorrodi.github.io/index.html</loc>
-    <lastmod>2026-09-12T13:48:31.721Z</lastmod>
-  </url>
-  <url>
     <loc>https://ryanzomorrodi.github.io/projects/legs/index.html</loc>
-    <lastmod>2026-09-09T16:56:22.546Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ryanzomorrodi.github.io/projects/socratadata/index.html</loc>
-    <lastmod>2026-09-08T18:46:15.232Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ryanzomorrodi.github.io/projects/rst/index.html</loc>
-    <lastmod>2026-09-08T18:46:15.228Z</lastmod>
+    <lastmod>2026-09-12T13:58:38.437Z</lastmod>
   </url>
   <url>
     <loc>https://ryanzomorrodi.github.io/projects/centr/index.html</loc>
-    <lastmod>2026-09-08T18:46:15.223Z</lastmod>
+    <lastmod>2026-09-12T13:58:38.436Z</lastmod>
   </url>
   <url>
-    <loc>https://ryanzomorrodi.github.io/projects/healthatlas/index.html</loc>
-    <lastmod>2026-09-08T18:46:15.230Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ryanzomorrodi.github.io/projects/sasquatch/index.html</loc>
-    <lastmod>2026-09-08T19:29:01.118Z</lastmod>
+    <loc>https://ryanzomorrodi.github.io/projects/socratadata/index.html</loc>
+    <lastmod>2026-09-12T13:58:38.531Z</lastmod>
   </url>
   <url>
     <loc>https://ryanzomorrodi.github.io/projects/index.html</loc>
-    <lastmod>2026-09-09T16:29:41.990Z</lastmod>
+    <lastmod>2026-09-12T13:58:38.437Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ryanzomorrodi.github.io/index.html</loc>
+    <lastmod>2026-09-12T13:58:38.434Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ryanzomorrodi.github.io/projects/sasquatch/index.html</loc>
+    <lastmod>2026-09-12T13:58:38.531Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ryanzomorrodi.github.io/projects/rst/index.html</loc>
+    <lastmod>2026-09-12T13:58:38.530Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ryanzomorrodi.github.io/projects/healthatlas/index.html</loc>
+    <lastmod>2026-09-12T13:58:38.437Z</lastmod>
   </url>
 </urlset>
