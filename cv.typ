@@ -51,50 +51,71 @@
 
 == Work Experience
 
-#work(
-  title: "Research Associate",
-  location: "Chicago, IL",
-  company: "Children's Environmental Health Initiative",
-  dates: dates-helper(start-date: "Jun 2023", end-date: "Present"),
+#generic-two-by-two(
+  top-left: [*Children's Environmental Health Initiative*],
+  top-right: [_Chicago, IL_],
+  bottom-left: [_Research Specialist (Full Time)_],
+  bottom-right: dates-helper(start-date: "Jul 2025", end-date: "Present"),
 )
-- Performed geospatial analysis of hospital and physician accessibility utilizing two-step floating catchment area methods.
-- Developed Rate Stabilizing Toolbox in Python to generate generating reliable, local-level age-standardized measures of chronic disease using the restricted univariate conditional autoregressive (UCAR) bayesian model.
-- Generated measures of hurricane exposure for 15 severe storms in order facilitate analysis of hurricane exposure effects on mortality amongst elderly individuals.
-- Instructed state, tribal, and local public health professionals on the use of GIS to assess and address chronic health disparities.
+#v(-0.5em)
+#pad(left: 1.5em)[
+- Led data acquisition, processing, and validation efforts for large nationwide health and environmental exposure datasets (exceeding 1TB) using R, Python, and SQL.
+- Utilized longitudinal modelling to analyze Epic electronic health records (EHR) data to explore the associations between air pollution and cardiovascular and respiratory health outcomes.
+- Built an ArcGIS Pro Python toolbox to simplify the process of generating reliable, geospatially resolved Bayesian estimates of chronic disease, now utilized by state health departments. Presented work at Council of State and Tribal Epidemiologists.
+- Developed a set of internal dashboards to investigate excess mortality and morbidity among the elderly following extreme weather events using DuckDB and ObservableJS.
+- Trained over 200 state, tribal, and local public health professionals in collaboration with CDC on the use of geospatial analytics to assess and address chronic health disparities.
+- Designed and maintained the lab’s online geospatial analytics training program materials and website.
+]
 
-#work(
-  title: "Co-Lead",
-  company: "GeoAdvocates",
-  location: "Chicago, IL",
-  dates: dates-helper(start-date: "Dec 2021", end-date: "Jun 2024"),
+#generic-one-by-two(
+  left: [_Research Associate (Full Time)_], 
+  right: dates-helper(start-date: "Jun 2023", end-date: "Jul 2025")
 )
+#v(-0.5em)
+#pad(left: 1.5em)[
+- Identified opportunities for automation within existing data workflows and built four internal R packages streamlining data acquisition and analysis processes for myself and across the broader team.
+- Automated the collection of datasets through the use of web scraping, API requests, and SQL queries to support epidemiological research.
+- Integrated precipitation, wind, and power outage datasets to develop estimates of climate disaster exposure and evaluate associated health risks.
+- Performed analysis of hospital and physician accessibility utilizing two-step floating catchment area methods.
+]
+
+#generic-two-by-two(
+  top-left: [*Department of Rheumatology, University of Illinois Chicago*],
+  top-right: [_Chicago, IL_],
+  bottom-left: [_Research Assistant (Part Time)_],
+  bottom-right: dates-helper(start-date: "Jul 2018", end-date: "May 2023"),
+)
+
+#pad(left: 1.5em)[
+- Independently performed bioinformatic analysis of RNA-seq data including differential expression, weighted network gene correlation analysis (WGNCA), Passing Attributes between Networks for Data Assimilation (PANDA) using R and Python.
+- Conducted and oversaw experimental techniques such as ELISA and qRT-PCR.
+]
+
+#generic-two-by-two(
+  top-left: [*Walgreens*],
+  top-right: [_Arlington Heights, IL_],
+  bottom-left: [_Pharmacy Technician (Part Time)_],
+  bottom-right: dates-helper(start-date: "July 2021", end-date: "May 2023"),
+)
+#pad(left: 1.5em)[
+- Utilized electronic health records software to access patient medical records, input insurance, allergy, and health condition records, and resolve patient inquiries.
+- Resolved insurance inquiries and resubmitted claims in order to ensure patient prescription adherence.
+- Filled, mixed, and dispensed prescriptions for approval by pharmacists.
+]
+
+== Projects
+
+#generic-two-by-two(
+  top-left: [*GeoAdvocates*],
+  top-right: [_Chicago, IL_],
+  bottom-left: [_Co-Lead_],
+  bottom-right: dates-helper(start-date: "Dec 2021", end-date: "Jun 2024"),
+)
+
 - Designed, in collaboration with another student, a two-part workshop series curriculum to teach students within multiple classes outlining medical deserts within Chicago and how students can utilize Geographic Information Systems (GIS) to expose Chicago health disparities.
 - Presented to several UIC courses (SOC251, PUBH100, US101, SOC100, and PPOL100) and registered student organizations.
 - Designed, collected, and analyzed survey data taken from participants before and after each workshop.
 - Discussed findings at conferences including the UIC Minority Health Conference and UIC School of Public Health Research and Scholarship Week Lightning Talks.
-
-#work(
-  title: "Research Assistant",
-  location: "Chicago, IL",
-  company: "Department of Rheumatology, University of Illinois Chicago",
-  dates: dates-helper(start-date: "July 2018", end-date: "May 2023"),
-)
-- Conducted and oversaw experimental techniques such as ELISA and qRT-PCR.
-- Independently, recorded and analyzed experimental data using both Excel & R.
-- Relayed analyses to principal investigator & discussed findings.
-- Implemented bioinformatic analysis of RNA-seq data including differential expression, weighted network gene correlation analysis (WGNCA), Passing Attributes between Networks for Data Assimilation (PANDA), and more.
-
-#work(
-  title: "Pharmacy Technician",
-  location: "Chicago, IL",
-  company: "Walgreens",
-  dates: dates-helper(start-date: "July 2021", end-date: "May 2023"),
-)
-- Utilized electronic health records software to access patient medical records, input insurance, allergy, and health condition records, and resolve patient inquiries.
-- Resolved insurance inquiries and resubmitted claims in order to ensure patient prescription adherence.
-- Filled, mixed, and dispensed prescriptions for approval by pharmacists.
-
-== Projects
 
 === Scientific Software
 
