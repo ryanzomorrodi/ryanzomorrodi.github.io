@@ -2,29 +2,23 @@
   {
     "listing": "/index.html",
     "items": [
-      "/project/socratadata/index.html",
-      "/project/sasquatch/index.html",
-      "/project/healthatlas/index.html",
-      "/project/centr/index.html",
-      "/project/rst/index.html",
-      "/project/pa470/index.html"
+      "/projects/legs/index.html",
+      "/projects/socratadata/index.html",
+      "/projects/sasquatch/index.html",
+      "/projects/healthatlas/index.html",
+      "/projects/centr/index.html",
+      "/projects/rst/index.html"
     ]
   },
   {
-    "listing": "/project/index.html",
+    "listing": "/projects/index.html",
     "items": [
-      "/project/socratadata/index.html",
-      "/project/sasquatch/index.html",
-      "/project/healthatlas/index.html",
-      "/project/centr/index.html",
-      "/project/rst/index.html",
-      "/project/pa470/index.html"
-    ]
-  },
-  {
-    "listing": "/notes/index.html",
-    "items": [
-      "/notes/ojs/index.html"
+      "/projects/legs/index.html",
+      "/projects/socratadata/index.html",
+      "/projects/sasquatch/index.html",
+      "/projects/healthatlas/index.html",
+      "/projects/centr/index.html",
+      "/projects/rst/index.html"
     ]
   }
 ]

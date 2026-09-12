@@ -1,191 +1,65 @@
 [
   {
-    "objectID": "notes/ojs/index.html",
-    "href": "notes/ojs/index.html",
-    "title": "Observable JS for an ggplot2 user",
-    "section": "",
-    "text": "Over the past year I have been playing around with quarto and trying to learn more about some of its features. I have really been enjoying the fact that quarto allows me to chain my R and python scripts into one single reproducable document. But why should I stop there?\nThe following are my notes about using objective js to make data visualization as some one who primarily uses ggplot2."
-  },
-  {
-    "objectID": "notes/ojs/index.html#ggplot2",
-    "href": "notes/ojs/index.html#ggplot2",
-    "title": "Observable JS for an ggplot2 user",
-    "section": "ggplot2",
-    "text": "ggplot2\nggplot2 was built with an underlying grammar, the Grammar of Graphics. This breaks down visualizations into 7 parts.\n\nData (ggplot()) - should be self-explanatory\nMapping (aes()) - Defines relationship between data and aesthetic attributes of layers\nLayers (geom_* or stat_*) - specifies graphical components displayed in a visualization\nScales (scale_*_*) - sets the axes, legends, and sometimes transformations\nFacets (facet_*) - splits up data into separate panels\nCoordinates (coord_*) - determines the coordinate system used to display elements\nThemes (theme*()) - control the look and feel of the plot elements\nNote: these are one line summaries of a much better description within the ggplot vignette, Introduction to ggplot2\nWhile this makes ggplot2 relatively easy to learn, but not all graphics libraries rely on this exact grammar. I will; however, try as best I can to translate the javascipt libraries used throughout these notes to this underlying grammar."
-  },
-  {
-    "objectID": "notes/ojs/index.html#translating-to-plot.js",
-    "href": "notes/ojs/index.html#translating-to-plot.js",
-    "title": "Observable JS for an ggplot2 user",
-    "section": "Translating to Plot.js",
-    "text": "Translating to Plot.js\nI know you want to become the next NYT visualization guru, but first let’s try to make some simplish, but powerful plots with Plot.js. Plot.js is build on d3, which is the visualization library that your favorite NYT data viz wizards use. Its syntax is quite a lot easier to translate into ggplot methods as compared to d3 so this is where we will start.\nSince, we are focused on data viz. I’m going to get my data from R and send it over to javascript using ojs_define().\n\n\n\nR\n\nojs_define(iris = iris)\n\n\nWe can now access our data in ojs.\n\n\n\nojs\n\niris\n\n\n\n\n\n\n\n\nBasic scatterplot\nLet’s start ploting, but stick with R for a second. Let’s make a classic scatterplot. Notice we specify three elements of the grammar of graphics and assume the rest.\n\nRPlot.js\n\n\nData: iris\nMapping: aes(x = Petal.Length, y = Petal.Width)\nLayer: geom_point()\n\n\n\nR\n\nlibrary(ggplot2)\n\nggplot(iris, aes(x = Petal.Length, y = Petal.Width)) +\n    geom_point()\n\n\n\n\n\n\n\n\n\n\n\nData: transpose(iris)\nMapping: {x: Petal.Length, y: Petal.Width}\nLayer: Plot.dot()\n\n\n\nojs\n\nPlot.plot({\n  marks: [\n    Plot.dot(transpose(iris), {x: \"Petal.Length\", y: \"Petal.Width\"})\n  ]\n})\n\n\n\n\n\n\n\n\n\n\n\n\nBasic barplot\nThis is where we experience our first sort of problem. ggplot2 layers often calculate stats for us. In this case ggplot2 calculates a count of each of the species and maps that to the y of each bar. Plot.js will not do this. We need to first calculate our stat and specify it as our y. (imagine you were only able to use geom_col()).\n\nRPlot.js\n\n\nData: iris\nMapping: aes(x = Species, fill = Species)\nLayer: geom_bar()\n\n\n\nR\n\nggplot(iris, aes(x = Species, fill = Species)) +\n    geom_bar()\n\n\n\n\n\n\n\n\n\n\n\nFirst, we will calculate the count for each species and pass it to javascript. We could do this in javascript really easy with Arquero, which was inspired by dplyr, but we’re learning Plot.js right now, so stay focused.\nData: transpose(iris)\nMapping: {x: \"Species\", y: \"n\", fill: \"Species\"}\nLayer: Plot.barY()\n\n\n\nR\n\niris_freq &lt;- dplyr::count(iris, Species)\nojs_define(iris_freq = iris_freq)\n\n\n\n\n\nojs\n\nPlot.plot({\n  marks: [\n    Plot.barY(transpose(iris_freq), {x: \"Species\", y: \"n\", fill: \"Species\"})\n  ]\n})\n\n\n\n\n\n\n\n\n\n\n\n\nTemporal log-scale line plot\nNow we’re going to add a scale element to our specification.\n\nRPlot.js\n\n\nData: economics\nMapping: aes(x = date, y = unemploy)\nLayer: geom_bar()\nScale: scale_x_date() and scale_y_log10()\n\n\n\nR\n\nggplot(economics, aes(x = date, y = unemploy)) +\n    geom_line() + \n    scale_x_date() +\n    scale_y_log10()\n\n\n\n\n\n\n\n\n\n\n\nData: transpose(economics)\nMapping: {x: \"date\", y: \"unemploy\"}\nLayer: Plot.line()\nScale: x: {type: \"time} and y: {type: \"log\"}\n\n\n\nR\n\nojs_define(economics = economics)\n\n\n\n\n\nojs\n\nPlot.plot({\n  x: {type: \"time\"},\n  y: {type: \"log\"},\n  marks: [\n    Plot.line(transpose(economics), {x: \"date\", y: \"unemploy\"})\n  ]}\n)\n\n\n\n\n\n\n\n\n\n\n\n\nFaceted boxplot\nThis is one kind of plot that in ggplot2 is technically speaking faceted, but without the use of a facet_*() function, either way it still demonstrates the point.\n\nRPlot.js\n\n\nSomething is a weird about the y-axis here, but we’ll ignore it\nData: iris_round\nMapping: aes(x = Petal.Length)\nLayer: geom_boxplot()\nFacet: aes(group = round(Petal.Width / 0.4) * 0.4)\n\n\n\nR\n\nggplot(iris, aes(x = Petal.Length, group = Petal.Width)) +\n    geom_boxplot()\n\n\n\n\n\n\n\n\n\n\n\nData: transpose(iris)\nMapping: {x: \"Petal.Length\"}\nLayer: Plot.boxX()\nFacet: transpose(iris).filter((d) =&gt; d[\"Petal.Length\"]) and {fy: \"Petal.Width\"}\n\n\n\nojs\n\nPlot.plot({\n  fy: {\n    reverse: true\n  },\n  marks: [\n    Plot.boxX(transpose(iris).filter((d) =&gt; d[\"Petal.Length\"]), {x: \"Petal.Length\", fy: \"Petal.Width\"})\n  ]\n})\n\n\n\n\n\n\n\n\n\n\n\n\nMap\nProjections for maps by their very nature tranform the coordinate system, so let’s see how we can use them in Plot.js.\n\nRPlot.js\n\n\nSomething is a weird about the y-axis here, but we’ll ignore it\nData: states\nLayer: geom_sf()\nCoordinates: coord_sf(crs = st_crs(\"ESRI:102003\"))\n\n\n\nR\n\nlibrary(sf)\n\nstates &lt;- read_sf(\"https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json\")\nst_crs(states) &lt;- 4326\n\nggplot(states) +\n    geom_sf() +\n    coord_sf(crs = st_crs(\"ESRI:102003\"))\n\n\n\n\n\n\n\n\n\n\n\nWe have to read in our data using d3 and topojson.\nData: statemesh\nLayer: Plot.geo()\nCoordinates: projection: \"albers-usa\"\n\n\n\nojs\n\nd3 = require(\"d3@7\")\ntopojson = require(\"topojson\")\n\nus_states = d3.json(\"https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json\")\nstatemesh = topojson.mesh(states, states.objects.states)\n\nPlot.plot({\n  projection: \"albers-usa\",\n  marks: [\n    Plot.geo(statemesh, {strokeOpacity: 1})\n  ]\n})"
-  },
-  {
-    "objectID": "notes/ojs/index.html#no-even-bother-translating-to-d3",
-    "href": "notes/ojs/index.html#no-even-bother-translating-to-d3",
-    "title": "Observable JS for an ggplot2 user",
-    "section": "No even bother translating to D3",
-    "text": "No even bother translating to D3\nOkay, we’re going to delve into d3. You probably get the point of Plot.js. Fundamentally, your thought process when making a Plot.js chart is relatively the same with slightly different syntax. But if you want to use D3 you’re going to completely rethink the way you make visualizations.\n\nBasic scatterplot\n\nscatterplot = {\n\n  // Specify the chart’s dimensions.\n  const width = 928;\n  const height = 600\n  const marginTop = 20;\n  const marginRight = 20;\n  const marginBottom = 30;\n  const marginLeft = 40;\n\n  const data = transpose(iris);\n\n  // Define the horizontal scale.\n  const x = d3.scaleLinear()\n      .domain(d3.extent(data, d =&gt; d[\"Petal.Length\"])).nice()\n      .range([marginLeft, width - marginRight]);\n\n  // Define the vertical scale.\n  const y = d3.scaleLinear()\n      .domain(d3.extent(data, d =&gt; d[\"Petal.Width\"])).nice()\n      .range([height - marginBottom, marginTop]);\n\n  // Create the container SVG.\n  const svg = d3.create(\"svg\")\n      .attr(\"width\", width)\n      .attr(\"height\", height)\n      .attr(\"viewBox\", [0, 0, width, height])\n      .attr(\"style\", \"max-width: 100%; height: auto;\");\n\n  // Add the axes.\n  svg.append(\"g\")\n      .attr(\"transform\", `translate(0,${height - marginBottom})`)\n      .call(d3.axisBottom(x));\n\n  svg.append(\"g\")\n      .attr(\"transform\", `translate(${marginLeft},0)`)\n      .call(d3.axisLeft(y));\n\n  // Append a circle for each data point.\n  svg.append(\"g\")\n    .selectAll(\"circle\")\n    .data(data)\n    .join(\"circle\")\n      .filter(d =&gt; d[\"Petal.Width\"])\n      .attr(\"cx\", d =&gt; x(d[\"Petal.Length\"]))\n      .attr(\"cy\", d =&gt; y(d[\"Petal.Width\"]))\n      .attr(\"r\", 3);\n\n  return svg.node();\n}\n\n\n\n\n\n\n\n\nBasic barplot\n\nbarplot = {\n  // Declare the chart dimensions and margins.\n  const width = 928;\n  const height = 600\n  const marginTop = 20;\n  const marginRight = 20;\n  const marginBottom = 30;\n  const marginLeft = 40;\n\n  const data = transpose(iris_freq);\n\n  // Declare the x scale.\n  const x = d3.scaleBand()\n      .domain(d3.groupSort(data, ([d]) =&gt; -d.n, (d) =&gt; d.Species)) // descending frequency\n      .range([marginLeft, width - marginRight])\n      .padding(0.1);\n  \n  // Declare the y scale.\n  const y = d3.scaleLinear()\n      .domain([0, d3.max(data, (d) =&gt; d.n)])\n      .range([height - marginBottom, marginTop]);\n\n  // Declare the fill scale.\n  const fillScale = d3.scaleOrdinal()\n    .domain(data.map(d =&gt; d.Species))\n    .range([\"#1f77b4\", \"#ff7f0e\", \"#2ca02c\"]);\n\n  // Create the SVG container.\n  const svg = d3.create(\"svg\")\n      .attr(\"width\", width)\n      .attr(\"height\", height)\n      .attr(\"viewBox\", [0, 0, width, height])\n      .attr(\"style\", \"max-width: 100%; height: auto;\");\n\n  // Add a rect for each bar.\n  svg.append(\"g\")\n    .selectAll()\n    .data(data)\n    .join(\"rect\")\n      .attr(\"x\", (d) =&gt; x(d.Species))\n      .attr(\"y\", (d) =&gt; y(d.n))\n      .attr(\"height\", (d) =&gt; y(0) - y(d.n))\n      .attr(\"width\", x.bandwidth())\n      .attr(\"fill\", (d) =&gt; fillScale(d.Species));\n\n\n  // Add the x-axis and label.\n  svg.append(\"g\")\n      .attr(\"transform\", `translate(0,${height - marginBottom})`)\n      .call(d3.axisBottom(x).tickSizeOuter(0));\n\n  // Add the y-axis and label, and remove the domain line.\n  svg.append(\"g\")\n      .attr(\"transform\", `translate(${marginLeft},0)`)\n      .call(d3.axisLeft(y).tickFormat((y) =&gt; (y * 100).toFixed()))\n      .call(g =&gt; g.select(\".domain\").remove())\n      .call(g =&gt; g.append(\"text\")\n          .attr(\"x\", -marginLeft)\n          .attr(\"y\", 10)\n          .attr(\"fill\", \"currentColor\")\n          .attr(\"text-anchor\", \"start\")\n          .text(\"↑ n\"));\n\n  // Return the SVG element.\n  return svg.node();\n}\n\n\n\n\n\n\n\n\nTemporal log-scale line plot\n\nlineplot = {\n  // Declare the chart dimensions and margins.\n  const width = 928;\n  const height = 600\n  const marginTop = 20;\n  const marginRight = 20;\n  const marginBottom = 30;\n  const marginLeft = 40;\n\n  const data = transpose(economics);\n\n  // Declare the x (horizontal position) scale.\n  const x = d3.scaleUtc()\n      .domain(d3.extent(data, d =&gt; new Date(d.date)))\n      .range([marginLeft, width - marginRight]);\n\n  // Declare the y (vertical position) scale.\n  const y = d3.scaleLog()\n      .domain(d3.extent(data, d =&gt; d.unemploy))\n      .range([height - marginBottom, marginTop]);\n\n  // Declare the line generator.\n  const line = d3.line()\n      .x(d =&gt; x(new Date(d.date)))\n      .y(d =&gt; y(d.unemploy));\n\n  // Create the SVG container.\n  const svg = d3.create(\"svg\")\n      .attr(\"width\", width)\n      .attr(\"height\", height)\n      .attr(\"viewBox\", [0, 0, width, height])\n      .attr(\"style\", \"max-width: 100%; height: auto; height: intrinsic;\");\n\n  // Add the x-axis.\n  svg.append(\"g\")\n      .attr(\"transform\", `translate(0,${height - marginBottom})`)\n      .call(d3.axisBottom(x).ticks(width / 80).tickSizeOuter(0));\n\n  // Add the y-axis, remove the domain line, add grid lines and a label.\n  svg.append(\"g\")\n      .attr(\"transform\", `translate(${marginLeft},0)`)\n      .call(d3.axisLeft(y).ticks(height / 40))\n      .call(g =&gt; g.select(\".domain\").remove())\n      .call(g =&gt; g.selectAll(\".tick line\").clone()\n          .attr(\"x2\", width - marginLeft - marginRight)\n          .attr(\"stroke-opacity\", 0.1))\n      .call(g =&gt; g.append(\"text\")\n          .attr(\"x\", -marginLeft)\n          .attr(\"y\", 10)\n          .attr(\"fill\", \"currentColor\")\n          .attr(\"text-anchor\", \"start\")\n          .text(\"↑ Daily close ($)\"));\n\n  // Append a path for the line.\n  svg.append(\"path\")\n      .attr(\"fill\", \"none\")\n      .attr(\"stroke\", \"steelblue\")\n      .attr(\"stroke-width\", 1.5)\n      .attr(\"d\", line(data));\n\n  return svg.node();\n}\n\n\n\n\n\n\n\n\nFaceted boxplot\nThis is a decent bit of work, you gotta bin the observations, calculate the IQR, range, and outliers, and create all the boxes, lines, and circles.\n\n\nMap\n\nus = d3.json(\"https://cdn.jsdelivr.net/npm/us-atlas@3/counties-albers-10m.json\")\n\nnation = topojson.feature(us, us.objects.nation)\nstates = topojson.mesh(us, us.objects.states)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nmap = {\n  // Declare the chart dimensions and margins.\n  const width = 975;\n  const height = 610;\n\n  // Construct a path generator.\n  const path = d3.geoPath();\n\n  // Create the SVG container.\n  const svg = d3.create(\"svg\")\n      .attr(\"width\", width)\n      .attr(\"height\", height)\n      .attr(\"viewBox\", [0, 0, width, height])\n      .attr(\"style\", \"width: 100%; height: auto; height: intrinsic;\");\n\n  // Create the cartographic background layers.\n  svg.append(\"path\")\n      .datum(nation)\n      .attr(\"fill\", \"#ddd\")\n      .attr(\"d\", path);\n\n  // Create state outlines.\n  svg.append(\"path\")\n      .datum(states)\n      .attr(\"fill\", \"none\")\n      .attr(\"stroke\", \"white\")\n      .attr(\"stroke-linejoin\", \"round\")\n      .attr(\"d\", path);\n\n  return svg.node();\n}"
-  },
-  {
-    "objectID": "notes/ojs/index.html#cool-maps",
-    "href": "notes/ojs/index.html#cool-maps",
-    "title": "Observable JS for an ggplot2 user",
-    "section": "Cool maps",
-    "text": "Cool maps\n\nVector map\n\nelection = d3.csv(\"https://raw.githubusercontent.com/tonmcg/US_County_Level_Election_Results_08-20/refs/heads/master/2020_US_County_Level_Presidential_Results.csv\")\n\ncounties = {\n  const counties = topojson.feature(us, us.objects.counties).features;\n  const _election = new Map(election.map((d) =&gt; [d.fips, d]));\n  counties.forEach(county =&gt; {\n    county.properties.margin2020 = +_election.get(county.id)?.margin2020;\n    county.properties.votes = +_election.get(county.id)?.votes;\n  });\n  return counties;\n}\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPlot.plot({\n  projection: \"albers-usa\",\n  length: {type: \"sqrt\", transform: Math.abs},\n  marks: [\n    Plot.geo(states, {strokeWidth: 0.5}),\n    Plot.geo(nation),\n    Plot.vector(\n      counties,\n      Plot.centroid({\n        anchor: \"start\",\n        length: (d) =&gt; d.properties.margin2020 * d.properties.votes,\n        stroke: (d) =&gt; d.properties.margin2020 &gt; 0 ? \"red\" : \"blue\",\n        rotate: (d) =&gt; d.properties.margin2020 &gt; 0 ? 60 : -60\n      })\n    )\n  ]\n})"
-  },
-  {
-    "objectID": "project/sasquatch/index.html",
-    "href": "project/sasquatch/index.html",
-    "title": "sasquatch",
-    "section": "",
-    "text": "I have had to do a fair number of assignments in SAS, and whenever I did I missed the ability to simply include all my code and my comments in a single reproducable rmarkdown/quarto document. When I first came across this presentation by Johann Laurent, I became excited. BaselR had introduced a package, configSAS that allowed me to use SAS with all the nicities that come with quarto!\nWhen I set configSAS up, I became a little disappointed. There was no syntax highlighting, the SAS output’s CSS caused weird styling behavior throughout the rest of the quarto document, and I couldn’t see any SAS output unless I rendered the entire quarto document over again. Still, I thought this was better than nothing. I continued to use configSAS for almost a year until I decided there had to be a better way. That’s what sasquatch aims to be.\nsasquatch gives you the ability to work with SAS interactively just as you would R or Python, but within your R IDE of choice. And it allows you render beautiful quarto documents with syntax highlighting. You can even send tables between R and SAS to do your analysis in whatever language is easiest!\nUpdate: I was invited to give a presentation on the origin and inner workings of sasquatch at the May 29th, 2025 SAS Open Source Community of Practice. You can see my presentation here."
-  },
-  {
-    "objectID": "project/centr/index.html",
-    "href": "project/centr/index.html",
-    "title": "centr",
-    "section": "",
-    "text": "centr is a package designed to calculate population weighted mean or median spatial centers. Mean centers can be calculated for projected and lon lat geometries. centr assumes a spherical representation of the earth for lon lat geometries, similar to S2.\nPopulation weighted centroids are a powerful tool to calculate plausible population exposure measures, and I use them quite a bit in my work. Now with centr calculating population weighted centroids within R is easy and fast."
-  },
-  {
-    "objectID": "project/healthatlas/index.html",
-    "href": "project/healthatlas/index.html",
-    "title": "healthatlas",
-    "section": "",
-    "text": "healthatlas is an unofficial R wrapper for Metopio atlases. Users can explore and download public health data straight from any atlas. This makes R workflows that rely on atlas data more painless and reproducable.\nI developed healthatlas in part as an exploration of httr2 functionality and to develop an easier way to download data from the Chicago Health Atlas (I find the website interface for downloading data a little inconvenient)."
-  },
-  {
-    "objectID": "project/pa470/index.html",
-    "href": "project/pa470/index.html",
-    "title": "PA 470",
-    "section": "",
-    "text": "PA 470 - Artificial Intelligence and Machine Learning in the Public Sector is a course taught by Eric Langowski as a part of the Civic Analytics curriculum at UIC. In the course, we worked through building an machine learning model to predict the sale prices of Cook county single family homes.\nFor my final project, I decided to do a replication study of Estimated Childhood Lead Exposure From Drinking Water in Chicago (Huynh et al., 2024). In the process, I learned a ton about Chicago’s lead contaminated water issues (Did you know that lead service lines were MANDATED by the city of Chicago until 1986 and as a result Chicago has 400,000 lead service lines).\nThe modeling involved a ton of data cleaning to aggregate data from the City of Chicago Department of Water Management Lead Test data, US Decennial Census, American Community Survey, Chicago Data Portal, and Chicago Health Atlas. Unfortunately, predicting lead exposure at the block level for a city as big as Chicago is quite a big problem. In the end I limited my models to elastic net logistic regression and random forest and limited my area of interest to the West Side of Chicago. But it was definitely a cool project, and you can check out my work at the above website."
-  },
-  {
-    "objectID": "cv.html",
-    "href": "cv.html",
-    "title": "Curriculum Vitae",
-    "section": "",
-    "text": "rzomor2@uic.edu"
-  },
-  {
-    "objectID": "cv.html#education",
-    "href": "cv.html#education",
-    "title": "Curriculum Vitae",
-    "section": "Education",
-    "text": "Education\nMaster of Science – Biostatistics\nUniversity of Illinois Chicago Aug 2023 — May 2025\n\nGPA: 4.00\n\nBachelor of Science – Biological Science\nUniversity of Illinois Chicago Aug 2019 — May 2023\n\nMinors: Computer Science & Public Health\nGraudated with Highest Distinction\nHonors College\nGPA: 4.00"
-  },
-  {
-    "objectID": "cv.html#work-experience",
-    "href": "cv.html#work-experience",
-    "title": "Curriculum Vitae",
-    "section": "Work Experience",
-    "text": "Work Experience\nResearch Associate\nChildren’s Environmental Health Initiative Jun 2023 — Present\n\nPerformed geospatial analysis of hospital and physician accessibility utilizing two-step floating catchment area methods.\nDeveloped Rate Stabilizing Toolbox in Python to generate generating reliable, local-level age-standardized measures of chronic disease using the restricted univariate conditional autoregressive (UCAR) bayesian model.\nGenerated measures of hurricane exposure for 15 severe storms in order facilitate analysis of hurricane exposure effects on mortality amongst elderly individuals.\nInstructed state, tribal, and local public health professionals on the use of GIS to assess and address chronic health disparities.\n\nPharmacy Technician\nWalgreens July 2021 — Jun 2023\n\nUtilized electronic health records software to access patient medical records, input insurance, allergy, and health condition records, and resolve patient inquiries.\nResolved insurance inquiries and resubmitted claims in order to ensure patient prescription adherence.\nFilled, mixed, and dispensed prescriptions for approval by pharmacists."
-  },
-  {
-    "objectID": "cv.html#research-experience",
-    "href": "cv.html#research-experience",
-    "title": "Curriculum Vitae",
-    "section": "Research Experience",
-    "text": "Research Experience\nIndependent Project\nGeoadvocates Dec 2021 — Jun 2024\n\nDesigned, in collaboration with another student, a two-part workshop series curriculum to teach students within multiple classes outlining medical deserts within Chicago and how students can utilize Geographic Information Systems (GIS) to expose Chicago health disparities.\nPresented to several UIC courses (SOC251, PUBH100, US101, SOC100, and PPOL100) and registered student organizations.\nDesigned, collected, and analyzed survey data taken from participants before and after each workshop.\nDiscussed findings at conferences including the UIC Minority Health Conference and UIC School of Public Health Research and Scholarship Week Lightning Talks.\n\nResearch Assistant\nDepartment of Rheumatology, University of Illinois at Chicago Jul 2018 — May 2023\n\nConducted and oversaw experimental techniques such as ELISA and qRT-PCR.\nIndependently, recorded and analyzed experimental data using both Excel & R.\nRelayed analyses to principal investigator & discussed findings.\nImplemented bioinformatic analysis of RNA-seq data including differential expression, weighted network gene correlation analysis (WGNCA), Passing Attributes between Networks for Data Assimilation (PANDA), and more."
-  },
-  {
-    "objectID": "cv.html#software",
-    "href": "cv.html#software",
-    "title": "Curriculum Vitae",
-    "section": "Software",
-    "text": "Software\nsocratadata\nR package API wrapper that utilzes Rust to parse Socrata datasets into R dataframes. Also features support for Socrata Query Langauge (SoQL) and the Socrata Discovery API.\narcpygris\nPython toolbox for downloading Census boundaries into an ArcGIS Pro project. Inspired heavily by the R package tigris.\nsasquatch\nR package that bridges SAS and R. Utilizes the Python package SASPy to enable transfer of data between R and SAS, interactive SAS evaluation, basic remote SAS client file management, and rendering of SAS within quarto/rmarkdown documents.\nhealthatlas\nR package API wrapper for Metopio health atlas data. Allows for easy exploration of health atlas datasets and metadata.\ncentr\nR package that designed to calculate planar or geodesic weighted mean or median spatial centers.\nRate Stabilizing Toolbox\nPython toolbox for generating reliable, local-level age-standardized measures of chronic disease using the restricted univariate conditional autoregressive (UCAR) bayesian model."
-  },
-  {
-    "objectID": "cv.html#presentations-workshops",
-    "href": "cv.html#presentations-workshops",
-    "title": "Curriculum Vitae",
-    "section": "Presentations & Workshops",
-    "text": "Presentations & Workshops\nBeyond the eye of the storm: why localized, multi-dimensional aspects of severe weather exposure matter for vulnerable, older adult populations\nCAFE: Hurricanes & Health: Understanding Risks and Fostering Resilience 4 Aug 2025\nEnhancing Local Level Surveillance and Data Visualization of Health Outcomes: Introducing a Set of Rate Stabilizing Tools\nCouncil of State and Territorial Epidemiologists 10 Jun 2025\nEnhancing Data to Action: Approaches for Using Maps to Address Chronic Disease\nCouncil of State and Territorial Epidemiologists 9 Jun 2025\nEncounter with sasquatch: Using SAS, R, and Quarto together\nSAS Open Source Community of Practice 25 May 2025\nPresentation Link\nUsing GIS to Study Social Determinants of Health with R\nNorthern Arizona University Center for Health Equity Research 6 — 7 Jun 24\nResource Link\nAn Introduction to ArcGIS Online Mini-Course\nGIS Capacity Building Project 17 — 24 Oct 23\nA Gentle Introduction to GIS Mini-Course\nGIS Capacity Building Project 19 — 26 Sep 23\nRNA-sequencing analysis of Macrophage Hyperactivation\nUIC Undergraduate Research Forum 18 Apr 2023\nEmpowering Community Members to Investigate and Address Chicago’s Health Disparities\nAmerican Public Health Association 9 Nov 2022\nEmpowering Community Members to Investigate and Address Chicago’s Health Disparities\nUIC Minority Health Conference 8 Apr 2022\nRecording Link\nDeveloping Student Workshops to Increase Community Engagement in Addressing Chicago’s Health Disparities\nUIC School of Public Health Research and Scholarship Week Lightning Talks 22 Apr 2022"
-  },
-  {
-    "objectID": "cv.html#publications",
-    "href": "cv.html#publications",
-    "title": "Curriculum Vitae",
-    "section": "Publications",
-    "text": "Publications\nSignificance of IL-34 and SDC-1 in the pathogenesis of RA cells and preclinical models Clinical Immunology May 2023\n10.1016/j.clim.2023.109635\nInhibition of IRAK4 dysregulates SARS-CoV-2 spike proteininduced macrophage inflammatory and glycolytic reprogramming\nCellular and Molecular Life Sciences May 2022\n10.1007/s00018-022-04329-8\nMetabolic reprogramming of macrophages instigates CCL21-induced arthritis\nImmunology & Cell Biology Dec 2021\n10.1111/imcb.12512\nMetabolic regulation of RA macrophages is distinct from RA fibroblasts and blockade of glycolysis alleviates inflammatory phenotype in both cell types\nCellular and Molecular Life Sciences Oct 2021\n10.1007/s00018-021-03978-5\nInterleukin-34 Reprograms Glycolytic and Osteoclastic Rheumatoid Arthritis Macrophages via Syndecan 1 and Macrophage Colony-Stimulating Factor Receptor\nArthritis & Rheumatology Sep 2021\n10.1002/art.41792\nTofacitinib therapy intercepts macrophage metabolic reprogramming instigated by SARS-CoV-2 Spike protein\nEuropean Journal of Immunology Jun 2021\n10.1002/eji.202049159\nCCL25 and CCR9 is a unique pathway that potentiates pannus formation by remodeling RA macrophages into mature osteoclasts\nEuropean Journal of Immunology Jan 2021\n10.1002/eji.202048681\nIRAK4 inhibition: a promising strategy for treating RA joint inflammation and bone erosion\nCellular & Molecular Immunology May 2020\n10.1038/s41423-020-0433-8\nMacrophages are the primary effector cells in IL-7-induced arthritis\nCellular & Molecular Immunology Jun 2019\n10.1038/s41423-019-0235-z\nImpact of obesity on autoimmune arthritis and its cardiovascular complications\nAutoimmunity Reviews Jun 2018\n10.1016/j.autrev.2018.02.007"
-  },
-  {
-    "objectID": "cv.html#teaching-experience",
-    "href": "cv.html#teaching-experience",
-    "title": "Curriculum Vitae",
-    "section": "Teaching Experience",
-    "text": "Teaching Experience\nGIS Training for Surveillance of Heart Disease, Stroke, and Other Chronic Diseases in State Health Departments\nGIS Capacity Building Project 25 Mar 25 — 31 Jul 25\nHawaii State Department of Health & University of Hawaiʻi GIS Capacity Building\nGIS Capacity Building Project 28 Jan 25 — 12 Jun 25\nAdvanced GIS Training for Surveillance of Heart Disease, Stroke and Other Chronic Diseases Among Health Department Staff\nGIS Capacity Building Project 13 Nov 24 - 29 Jan 25\nState Health Departments Chronic Disease Surveillance\nGIS Capacity Building Project 6 Mar 24 — 31 Jul 24\nTribal Epidemiological Centers Chronic Disease Surveillance\nGIS Capacity Building Project 10 Oct 23 — 31 Jan 24"
-  },
-  {
-    "objectID": "cv.html#honors",
-    "href": "cv.html#honors",
-    "title": "Curriculum Vitae",
-    "section": "Honors",
-    "text": "Honors\nHighest Distinction\nUIC Department of Biological Sciences 2023\nPasteur Prize Nominee\nUIC Department of Biological Sciences 2023\nResearch Grant\nUIC Honors College 2022\nTravel Grant\nUIC Honors College 2022\nMaurice Prize\nUIC Student Leadership and Civic Engagement 2022\nUndergraduate Most Outstanding Presentation\nUIC School of Public Health Research Week 2022\nChancellor’s Student Service Award\nUIC Student Leadership and Civic Engagement 2022\nPresident’s Volunteer Service Award - Bronze\nUIC Student Leadership and Civic Engagement 2021\n1st place - Division 4\nCollegiate Chess League 2021\nChancellor’s Student Service Award\nUIC Student Leadership and Civic Engagement 2021\nResearch Grant\nUIC Honors College 2020"
-  },
-  {
-    "objectID": "cv.html#professional-membership",
-    "href": "cv.html#professional-membership",
-    "title": "Curriculum Vitae",
-    "section": "Professional Membership",
-    "text": "Professional Membership\nAmerican Public Health Association 2022\nHarvard Innovation Lab 2022 — 2024\nClinton Global Initiative University Fellowship 2023\nAmerican Society for Biochemistry and Molecular Biology 2020 — 2022"
-  },
-  {
-    "objectID": "cv.html#leadership",
-    "href": "cv.html#leadership",
-    "title": "Curriculum Vitae",
-    "section": "Leadership",
-    "text": "Leadership\nSecretary\nUIC Society of Future Physicians 2021 — 2023\nPresident\nChess Club at UIC 2021 — 2023\nSecretary\nUIC American Society for Biochemistry and Molecular Biology 2021 — 2022\nMedia chairman\nSpreading Healthcare Awareness through Reciprocal Education (SHARE) 2020 — 2022\nStudent leader\nUIC Student Leadership and Civic Engagement 2019 — 2022\nChapter representative\nUIC American Society for Biochemistry and Molecular Biology 2020 — 2021\nVice-president\nChess Club at UIC 2020 — 2021"
-  },
-  {
-    "objectID": "cv.html#references",
-    "href": "cv.html#references",
-    "title": "Curriculum Vitae",
-    "section": "References",
-    "text": "References\nAvailable upon request"
-  },
-  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Ryan Zomorrodi",
     "section": "",
-    "text": "Hi, I'm \n\n  \n    \n      Ryan Zomorrodi\n      a Data Analyst\n      an OSS Enthusiast\n      an R Nerd\n     \n  \n\n\n  \n  \n  \n  \n\n\n\nI’m an data analyst working for the Children’s Environmental Health Initiative. I enjoy utilizing data to solve complex problems and making tools that make data analysis easier."
+    "text": "Hi, I'm \n\n  \n    \n      Ryan Zomorrodi\n      a Data Analyst\n      an OSS Enthusiast\n      an R Nerd\n     \n  \n\n\nI’m a data analyst working for the Children’s Environmental Health Initiative. I enjoy utilizing data to solve complex problems and making tools that make data analysis easier.\nTake a look at my CV!"
   },
   {
-    "objectID": "index.html#latest-projects",
-    "href": "index.html#latest-projects",
+    "objectID": "index.html#projects",
+    "href": "index.html#projects",
     "title": "Ryan Zomorrodi",
-    "section": "Latest Projects",
-    "text": "Latest Projects\n\n\n\n\n\n\n\n\n\n\nsocratadata\n\n\nExplore and Import Socrata Data\n\n\n\nR\n\n\nRust\n\n\nSQL\n\n\nAPI\n\n\nhttr2\n\n\n\n\nMay 5, 2025\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nsasquatch\n\n\nUse SAS, R, and Quarto together\n\n\n\nR\n\n\nSAS\n\n\nPython\n\n\nreticulate\n\n\nSASPy\n\n\n\n\nNov 16, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nhealthatlas\n\n\nExplore and Import Metopio Powered Health Atlases\n\n\n\nR\n\n\nAPI\n\n\nhttr2\n\n\n\n\nSep 13, 2024\n\n\n\n\n\n\n\n\nNo matching items"
+    "section": "Projects",
+    "text": "Projects\n\n\n\n\n\n\n\n\n\n\nlegs\n\n\nA TUI for viewing R data\n\n\n\nR\n\nrust\n\nratatui\n\n\n\n\nSep 7, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nsocratadata\n\n\nExplore and Import Socrata Data\n\n\n\nR\n\nRust\n\nSQL\n\nAPI\n\nhttr2\n\n\n\n\nMay 5, 2025\n\n\n\n\n\n\n\n\n\n\n\n\n\nsasquatch\n\n\nUse SAS, R, and Quarto together\n\n\n\nR\n\nSAS\n\nPython\n\nreticulate\n\nSASPy\n\n\n\n\nNov 16, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\nhealthatlas\n\n\nExplore and Import Metopio Powered Health Atlases\n\n\n\nR\n\nAPI\n\nhttr2\n\n\n\n\nSep 13, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\ncentr\n\n\nA Package for Weighted and Unweighted Spatial Centers\n\n\n\nR\n\nGIS\n\n\n\n\nJul 21, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\nRate Stabilizing Toolbox\n\n\nSmall Area Estimation ArcGIS Pro Python Toolbox\n\n\n\nPython\n\nArcGIS Pro\n\nBayesian\n\nGIS\n\n\n\n\nJul 18, 2024\n\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "project/rst/index.html",
-    "href": "project/rst/index.html",
-    "title": "Rate Stabilizing Toolbox",
+    "objectID": "projects/legs/index.html",
+    "href": "projects/legs/index.html",
+    "title": "legs",
     "section": "",
-    "text": "The Rate Stabilizing Toolbox (RSTbx) is an ArcGIS Pro Python toolbox for generating reliable, local-level age-standardized measures of chronic disease developed from scratch in partnership with the Centers for Disease Control and Prevention to replace the original Rate Stabilizing Tool.\nIt composed of three tools:\n\nCensus Data Retriever Tool (CDR): Utilizes the Census API to download county or tract-level population tables (optionally stratified by age) along with boundary files from the Census HTTP server.\nIndividual Data Processing Tool (IDP): Aggregates individual data to an optionally age stratified population table and preforms checks to warn user if input data is invalid.\nRate Stabilizing Tool (RST): Utilizes a restricted CAR model to generate optionally age adjusted rates for local areas given the population data from the IDP and a geographic layer.\n\nIt improves on the original RST by radically simplifying the interface, speeding up estimatation time, and providing better error/warning messaging."
+    "text": "The Problem\nI have always been looking for ways to become a more efficient in my work. Despite creating tons of keybindings for tasks I do commonly, building several packages to make my analyses easier, and reading a whole bunch of R docs pages, the single most impactful change to my efficiency has been learning vim motions.\nI started learning vim motions in VSCode, then Positron, and over the past year, I have completely ditched Positron and RStudio for my R development and fully embraced neovim (thanks in part to this great blog post). I am completely in love with neovim and am beginnning to finally feel like I have my neovim config pretty dialed in. But I still have one minor annoyance: the lack of an interactive data viewer.\nBy default on my machine, when you call View() on a data.frame, you get something like this:\n\n\n\n\n\nNot exactly a sight for sore eyes.\nThere are ways to make this a little better. In R.nvim there are ways to make this a lot more bearable like a keybinding to print an object as a comment or a global environment viewer. However, neither of these quite satisfy my desire to interactively step through an object in the same way you can within RStudio.\n\n\n\n\n\nSo I created an R package of my own that does just that. legs is a neovim-first TUI data viewer for R which leverages the power of the pillar R package to allow you to interactively explore data.frames, matrixs, arrays, lists, and vectors.\n\n\n\nHow it works\nBuilt in Rust, legs is performant. To keep memory overhead minimal, legs calculates the exact bounding box of rows and columns visible in your current viewport. It then calls pillar::ctl_new_pillar_list only on that visible subset of R data. This allows legs to honor R data formatting conventions while maintaining the ability to quickly maneuver through a dataset.\nAs an example, here it is maneuvering through a dataset almost a gigabyte in size.\n\n\nCode\n\nnum_rows &lt;- 1000000\nnum_cols &lt;- 100\n\nbig_matrix &lt;- matrix(rnorm(num_rows * num_cols), nrow = num_rows, ncol = num_cols)\nbig_df &lt;- as.data.frame(big_matrix)\n\ncolnames(big_df) &lt;- paste0(\"Var_\", 1:num_cols)\nbig_df$ID &lt;- paste0(\"ID_\", 1:num_rows)\nbig_df$Group &lt;- as.factor(sample(c(\"Control\", \"Treatment_A\", \"Treatment_B\"), num_rows, replace = TRUE))\n\nprint(lobstr::obj_size(big_df))\n# 875.93 MB\nlegs::view(big_df)\n\n\n\n\nTry it out\nYou can install the development version of legs from GitHub with:\n# install.packages(\"pak\")\npak::pak(\"ryanzomorrodi/legs\")\nlegs does not work in Positron or RStudio because of limitations within their implemenation of the R console. It does however work inside of a normal R terminal or an arf session.\nIf you have any additional feature ideas, please feel free to create an issue."
   },
   {
-    "objectID": "project/socratadata/index.html",
-    "href": "project/socratadata/index.html",
+    "objectID": "projects/socratadata/index.html",
+    "href": "projects/socratadata/index.html",
     "title": "socratadata",
     "section": "",
     "text": "socratadata is an unofficial R wrapper around the Socrata Data, Metadata, and Discovery APIs which utilizes Rust 🦀 to parse Socrata datatypes into R columns. The City of Chicago currently maintains another R package, socratadata improves upon the existing RSocrata package by introducing support for the Socrata Discovery API and all Socrata datatypes. Additionally, socratadata allows for easy use of Socrata Query Language (SoQL).\nBetween socratadata and healthatlas, you can easily import any dataset into R from both Chicago’s major data repositories, the Chicago Data Portal and Chicago Health Atlas. And countless other government data repositories are supported, like the Centers for Disease Control & Prevention, U.S. Department of Transportation, and many more."
   },
   {
-    "objectID": "project/index.html",
-    "href": "project/index.html",
-    "title": "Projects",
+    "objectID": "projects/rst/index.html",
+    "href": "projects/rst/index.html",
+    "title": "Rate Stabilizing Toolbox",
     "section": "",
-    "text": "socratadata\n\n\nExplore and Import Socrata Data\n\n\n\nR\n\n\nRust\n\n\nSQL\n\n\nAPI\n\n\nhttr2\n\n\n\n\nMay 5, 2025\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nsasquatch\n\n\nUse SAS, R, and Quarto together\n\n\n\nR\n\n\nSAS\n\n\nPython\n\n\nreticulate\n\n\nSASPy\n\n\n\n\nNov 16, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nhealthatlas\n\n\nExplore and Import Metopio Powered Health Atlases\n\n\n\nR\n\n\nAPI\n\n\nhttr2\n\n\n\n\nSep 13, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncentr\n\n\nA Package for Weighted and Unweighted Spatial Centers\n\n\n\nR\n\n\nGIS\n\n\n\n\nJul 21, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRate Stabilizing Toolbox\n\n\nSmall Area Estimation ArcGIS Pro Python Toolbox\n\n\n\nPython\n\n\nArcGIS Pro\n\n\nBayesian\n\n\nGIS\n\n\n\n\nJul 18, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPA 470\n\n\nMachine Learning in the Public Sector\n\n\n\nR\n\n\nMachine Learning\n\n\ntidymodels\n\n\nGIS\n\n\n\n\nApr 27, 2024\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "The Rate Stabilizing Toolbox (RSTbx) is an ArcGIS Pro Python toolbox for generating reliable, local-level age-standardized measures of chronic disease developed from scratch in partnership with the Centers for Disease Control and Prevention to replace the original Rate Stabilizing Tool.\nIt composed of three tools:\n\nCensus Data Retriever Tool (CDR): Utilizes the Census API to download county or tract-level population tables (optionally stratified by age) along with boundary files from the Census HTTP server.\nIndividual Data Processing Tool (IDP): Aggregates individual data to an optionally age stratified population table and preforms checks to warn user if input data is invalid.\nRate Stabilizing Tool (RST): Utilizes a restricted CAR model to generate optionally age adjusted rates for local areas given the population data from the IDP and a geographic layer.\n\nIt improves on the original RST by radically simplifying the interface, speeding up estimatation time, and providing better error/warning messaging."
   },
   {
-    "objectID": "notes/index.html",
-    "href": "notes/index.html",
-    "title": "Notes",
+    "objectID": "projects/centr/index.html",
+    "href": "projects/centr/index.html",
+    "title": "centr",
     "section": "",
-    "text": "Observable JS for an ggplot2 user\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "centr is a package designed to calculate population weighted mean or median spatial centers. Mean centers can be calculated for projected and lon lat geometries. centr assumes a spherical representation of the earth for lon lat geometries, similar to S2.\nPopulation weighted centroids are a powerful tool to calculate plausible population exposure measures, and I use them quite a bit in my work. Now with centr calculating population weighted centroids within R is easy and fast."
+  },
+  {
+    "objectID": "projects/healthatlas/index.html",
+    "href": "projects/healthatlas/index.html",
+    "title": "healthatlas",
+    "section": "",
+    "text": "healthatlas is an unofficial R wrapper for Metopio atlases. Users can explore and download public health data straight from any atlas. This makes R workflows that rely on atlas data more painless and reproducable.\nI developed healthatlas in part as an exploration of httr2 functionality and to develop an easier way to download data from the Chicago Health Atlas (I find the website interface for downloading data a little inconvenient)."
+  },
+  {
+    "objectID": "projects/sasquatch/index.html",
+    "href": "projects/sasquatch/index.html",
+    "title": "sasquatch",
+    "section": "",
+    "text": "I have had to do a fair number of assignments in SAS, and whenever I did I missed the ability to simply include all my code and my comments in a single reproducable rmarkdown/quarto document. When I first came across this presentation by Johann Laurent, I became excited. BaselR had introduced a package, configSAS that allowed me to use SAS with all the nicities that come with quarto!\nWhen I set configSAS up, I became a little disappointed. There was no syntax highlighting, the SAS output’s CSS caused weird styling behavior throughout the rest of the quarto document, and I couldn’t see any SAS output unless I rendered the entire quarto document over again. Still, I thought this was better than nothing. I continued to use configSAS for almost a year until I decided there had to be a better way. That’s what sasquatch aims to be.\nsasquatch gives you the ability to work with SAS interactively just as you would R or Python, but within your R IDE of choice. And it allows you render beautiful quarto documents with syntax highlighting. You can even send tables between R and SAS to do your analysis in whatever language is easiest!\nUpdate: I was invited to give a presentation on the origin and inner workings of sasquatch at the May 29th, 2025 SAS Open Source Community of Practice. You can see my presentation here."
+  },
+  {
+    "objectID": "projects/index.html",
+    "href": "projects/index.html",
+    "title": "Projects",
+    "section": "",
+    "text": "legs\n\n\nA TUI for viewing R data\n\n\n\nR\n\nrust\n\nratatui\n\n\n\n\nSep 7, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nsocratadata\n\n\nExplore and Import Socrata Data\n\n\n\nR\n\nRust\n\nSQL\n\nAPI\n\nhttr2\n\n\n\n\nMay 5, 2025\n\n\n\n\n\n\n\n\n\n\n\n\n\nsasquatch\n\n\nUse SAS, R, and Quarto together\n\n\n\nR\n\nSAS\n\nPython\n\nreticulate\n\nSASPy\n\n\n\n\nNov 16, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\nhealthatlas\n\n\nExplore and Import Metopio Powered Health Atlases\n\n\n\nR\n\nAPI\n\nhttr2\n\n\n\n\nSep 13, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\ncentr\n\n\nA Package for Weighted and Unweighted Spatial Centers\n\n\n\nR\n\nGIS\n\n\n\n\nJul 21, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\nRate Stabilizing Toolbox\n\n\nSmall Area Estimation ArcGIS Pro Python Toolbox\n\n\n\nPython\n\nArcGIS Pro\n\nBayesian\n\nGIS\n\n\n\n\nJul 18, 2024\n\n\n\n\n\n\nNo matching items"
   }
 ]
