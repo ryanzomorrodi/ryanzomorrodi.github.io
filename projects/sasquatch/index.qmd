@@ -14,7 +14,10 @@ categories:
 links:
 - icon: book
   name: Docs
-  url: https://ryanzomorrodi.github.io/sasquatch/
+  url: https://docs.ropensci.org/sasquatch/
+- icon: robot 
+  name: r-universe
+  url: https://ropensci.r-universe.dev/sasquatch
 - icon: github 
   name: Source
   url: https://github.com/ryanzomorrodi/sasquatch/
