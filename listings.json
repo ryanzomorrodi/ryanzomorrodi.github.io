@@ -1,6 +1,6 @@
 [
   {
-    "listing": "/projects/index.html",
+    "listing": "/index.html",
     "items": [
       "/projects/legs/index.html",
       "/projects/socratadata/index.html",
@@ -11,7 +11,7 @@
     ]
   },
   {
-    "listing": "/index.html",
+    "listing": "/projects/index.html",
     "items": [
       "/projects/legs/index.html",
       "/projects/socratadata/index.html",

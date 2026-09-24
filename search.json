@@ -7,25 +7,25 @@
     "text": "The Problem\nI have always been looking for ways to become a more efficient in my work. Despite creating tons of keybindings for tasks I do commonly, building several packages to make my analyses easier, and reading a whole bunch of R docs pages, the single most impactful change to my efficiency has been learning vim motions.\nI started learning vim motions in VSCode, then Positron, and over the past year, I have completely ditched Positron and RStudio for my R development and fully embraced neovim (thanks in part to this great blog post). I am completely in love with neovim and am beginnning to finally feel like I have my neovim config pretty dialed in. But I still have one minor annoyance: the lack of an interactive data viewer.\nBy default on my machine, when you call View() on a data.frame, you get something like this:\n\n\n\n\n\nNot exactly a sight for sore eyes.\nThere are ways to make this a little better. In R.nvim there are ways to make this a lot more bearable like a keybinding to print an object as a comment or a global environment viewer. However, neither of these quite satisfy my desire to interactively step through an object in the same way you can within RStudio.\n\n\n\n\n\nSo I created an R package of my own that does just that. legs is a neovim-first TUI data viewer for R which leverages the power of the pillar R package to allow you to interactively explore data.frames, matrixs, arrays, lists, and vectors.\n\n\n\nHow it works\nBuilt in Rust, legs is performant. To keep memory overhead minimal, legs calculates the exact bounding box of rows and columns visible in your current viewport. It then calls pillar::ctl_new_pillar_list only on that visible subset of R data. This allows legs to honor R data formatting conventions while maintaining the ability to quickly maneuver through a dataset.\nAs an example, here it is maneuvering through a dataset almost a gigabyte in size.\n\n\nCode\n\nnum_rows &lt;- 1000000\nnum_cols &lt;- 100\n\nbig_matrix &lt;- matrix(rnorm(num_rows * num_cols), nrow = num_rows, ncol = num_cols)\nbig_df &lt;- as.data.frame(big_matrix)\n\ncolnames(big_df) &lt;- paste0(\"Var_\", 1:num_cols)\nbig_df$ID &lt;- paste0(\"ID_\", 1:num_rows)\nbig_df$Group &lt;- as.factor(sample(c(\"Control\", \"Treatment_A\", \"Treatment_B\"), num_rows, replace = TRUE))\n\nprint(lobstr::obj_size(big_df))\n# 875.93 MB\nlegs::view(big_df)\n\n\n\n\nTry it out\nYou can install the development version of legs from GitHub with:\n# install.packages(\"pak\")\npak::pak(\"ryanzomorrodi/legs\")\nlegs does not work in Positron or RStudio because of limitations within their implemenation of the R console. It does however work inside of a normal R terminal or an arf session.\nIf you have any additional feature ideas, please feel free to create an issue."
   },
   {
+    "objectID": "projects/healthatlas/index.html",
+    "href": "projects/healthatlas/index.html",
+    "title": "healthatlas",
+    "section": "",
+    "text": "healthatlas is an unofficial R wrapper for Metopio atlases. Users can explore and download public health data straight from any atlas. This makes R workflows that rely on atlas data more painless and reproducable.\nI developed healthatlas in part as an exploration of httr2 functionality and to develop an easier way to download data from the Chicago Health Atlas (I find the website interface for downloading data a little inconvenient)."
+  },
+  {
+    "objectID": "projects/rst/index.html",
+    "href": "projects/rst/index.html",
+    "title": "Rate Stabilizing Toolbox",
+    "section": "",
+    "text": "The Rate Stabilizing Toolbox (RSTbx) is an ArcGIS Pro Python toolbox for generating reliable, local-level age-standardized measures of chronic disease developed from scratch in partnership with the Centers for Disease Control and Prevention to replace the original Rate Stabilizing Tool.\nIt composed of three tools:\n\nCensus Data Retriever Tool (CDR): Utilizes the Census API to download county or tract-level population tables (optionally stratified by age) along with boundary files from the Census HTTP server.\nIndividual Data Processing Tool (IDP): Aggregates individual data to an optionally age stratified population table and preforms checks to warn user if input data is invalid.\nRate Stabilizing Tool (RST): Utilizes a restricted CAR model to generate optionally age adjusted rates for local areas given the population data from the IDP and a geographic layer.\n\nIt improves on the original RST by radically simplifying the interface, speeding up estimatation time, and providing better error/warning messaging."
+  },
+  {
     "objectID": "projects/centr/index.html",
     "href": "projects/centr/index.html",
     "title": "centr",
     "section": "",
     "text": "centr is a package designed to calculate population weighted mean or median spatial centers. Mean centers can be calculated for projected and lon lat geometries. centr assumes a spherical representation of the earth for lon lat geometries, similar to S2.\nPopulation weighted centroids are a powerful tool to calculate plausible population exposure measures, and I use them quite a bit in my work. Now with centr calculating population weighted centroids within R is easy and fast."
-  },
-  {
-    "objectID": "projects/socratadata/index.html",
-    "href": "projects/socratadata/index.html",
-    "title": "socratadata",
-    "section": "",
-    "text": "socratadata is an unofficial R wrapper around the Socrata Data, Metadata, and Discovery APIs which utilizes Rust 🦀 to parse Socrata datatypes into R columns. The City of Chicago currently maintains another R package, socratadata improves upon the existing RSocrata package by introducing support for the Socrata Discovery API and all Socrata datatypes. Additionally, socratadata allows for easy use of Socrata Query Language (SoQL).\nBetween socratadata and healthatlas, you can easily import any dataset into R from both Chicago’s major data repositories, the Chicago Data Portal and Chicago Health Atlas. And countless other government data repositories are supported, like the Centers for Disease Control & Prevention, U.S. Department of Transportation, and many more."
-  },
-  {
-    "objectID": "projects/index.html",
-    "href": "projects/index.html",
-    "title": "Projects",
-    "section": "",
-    "text": "legs\n\n\nA TUI for viewing R data\n\n\n\nR\n\nrust\n\nratatui\n\n\n\n\nSep 7, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nsocratadata\n\n\nExplore and Import Socrata Data\n\n\n\nR\n\nRust\n\nSQL\n\nAPI\n\nhttr2\n\n\n\n\nMay 5, 2025\n\n\n\n\n\n\n\n\n\n\n\n\n\nsasquatch\n\n\nUse SAS, R, and Quarto together\n\n\n\nR\n\nSAS\n\nPython\n\nreticulate\n\nSASPy\n\n\n\n\nNov 16, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\nhealthatlas\n\n\nExplore and Import Metopio Powered Health Atlases\n\n\n\nR\n\nAPI\n\nhttr2\n\n\n\n\nSep 13, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\ncentr\n\n\nA Package for Weighted and Unweighted Spatial Centers\n\n\n\nR\n\nGIS\n\n\n\n\nJul 21, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\nRate Stabilizing Toolbox\n\n\nSmall Area Estimation ArcGIS Pro Python Toolbox\n\n\n\nPython\n\nArcGIS Pro\n\nBayesian\n\nGIS\n\n\n\n\nJul 18, 2024\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",
@@ -49,17 +49,17 @@
     "text": "I have had to do a fair number of assignments in SAS, and whenever I did I missed the ability to simply include all my code and my comments in a single reproducable rmarkdown/quarto document. When I first came across this presentation by Johann Laurent, I became excited. BaselR had introduced a package, configSAS that allowed me to use SAS with all the nicities that come with quarto!\nWhen I set configSAS up, I became a little disappointed. There was no syntax highlighting, the SAS output’s CSS caused weird styling behavior throughout the rest of the quarto document, and I couldn’t see any SAS output unless I rendered the entire quarto document over again. Still, I thought this was better than nothing. I continued to use configSAS for almost a year until I decided there had to be a better way. That’s what sasquatch aims to be.\nsasquatch gives you the ability to work with SAS interactively just as you would R or Python, but within your R IDE of choice. And it allows you render beautiful quarto documents with syntax highlighting. You can even send tables between R and SAS to do your analysis in whatever language is easiest!\nUpdate: I was invited to give a presentation on the origin and inner workings of sasquatch at the May 29th, 2025 SAS Open Source Community of Practice. You can see my presentation here."
   },
   {
-    "objectID": "projects/rst/index.html",
-    "href": "projects/rst/index.html",
-    "title": "Rate Stabilizing Toolbox",
+    "objectID": "projects/index.html",
+    "href": "projects/index.html",
+    "title": "Projects",
     "section": "",
-    "text": "The Rate Stabilizing Toolbox (RSTbx) is an ArcGIS Pro Python toolbox for generating reliable, local-level age-standardized measures of chronic disease developed from scratch in partnership with the Centers for Disease Control and Prevention to replace the original Rate Stabilizing Tool.\nIt composed of three tools:\n\nCensus Data Retriever Tool (CDR): Utilizes the Census API to download county or tract-level population tables (optionally stratified by age) along with boundary files from the Census HTTP server.\nIndividual Data Processing Tool (IDP): Aggregates individual data to an optionally age stratified population table and preforms checks to warn user if input data is invalid.\nRate Stabilizing Tool (RST): Utilizes a restricted CAR model to generate optionally age adjusted rates for local areas given the population data from the IDP and a geographic layer.\n\nIt improves on the original RST by radically simplifying the interface, speeding up estimatation time, and providing better error/warning messaging."
+    "text": "legs\n\n\nA TUI for viewing R data\n\n\n\nR\n\nrust\n\nratatui\n\n\n\n\nSep 7, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nsocratadata\n\n\nExplore and Import Socrata Data\n\n\n\nR\n\nRust\n\nSQL\n\nAPI\n\nhttr2\n\n\n\n\nMay 5, 2025\n\n\n\n\n\n\n\n\n\n\n\n\n\nsasquatch\n\n\nUse SAS, R, and Quarto together\n\n\n\nR\n\nSAS\n\nPython\n\nreticulate\n\nSASPy\n\n\n\n\nNov 16, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\nhealthatlas\n\n\nExplore and Import Metopio Powered Health Atlases\n\n\n\nR\n\nAPI\n\nhttr2\n\n\n\n\nSep 13, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\ncentr\n\n\nA Package for Weighted and Unweighted Spatial Centers\n\n\n\nR\n\nGIS\n\n\n\n\nJul 21, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\nRate Stabilizing Toolbox\n\n\nSmall Area Estimation ArcGIS Pro Python Toolbox\n\n\n\nPython\n\nArcGIS Pro\n\nBayesian\n\nGIS\n\n\n\n\nJul 18, 2024\n\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "projects/healthatlas/index.html",
-    "href": "projects/healthatlas/index.html",
-    "title": "healthatlas",
+    "objectID": "projects/socratadata/index.html",
+    "href": "projects/socratadata/index.html",
+    "title": "socratadata",
     "section": "",
-    "text": "healthatlas is an unofficial R wrapper for Metopio atlases. Users can explore and download public health data straight from any atlas. This makes R workflows that rely on atlas data more painless and reproducable.\nI developed healthatlas in part as an exploration of httr2 functionality and to develop an easier way to download data from the Chicago Health Atlas (I find the website interface for downloading data a little inconvenient)."
+    "text": "socratadata is an unofficial R wrapper around the Socrata Data, Metadata, and Discovery APIs which utilizes Rust 🦀 to parse Socrata datatypes into R columns. The City of Chicago currently maintains another R package, socratadata improves upon the existing RSocrata package by introducing support for the Socrata Discovery API and all Socrata datatypes. Additionally, socratadata allows for easy use of Socrata Query Language (SoQL).\nBetween socratadata and healthatlas, you can easily import any dataset into R from both Chicago’s major data repositories, the Chicago Data Portal and Chicago Health Atlas. And countless other government data repositories are supported, like the Centers for Disease Control & Prevention, U.S. Department of Transportation, and many more."
   }
 ]
